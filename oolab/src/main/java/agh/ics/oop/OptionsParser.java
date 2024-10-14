@@ -2,6 +2,8 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.MoveDirection;
 
+import java.util.Arrays;
+
 public class OptionsParser {
     public static MoveDirection[] convert(String[] args) {
              MoveDirection[] moveDirections = new MoveDirection[args.length];
@@ -13,12 +15,13 @@ public class OptionsParser {
                          case "b" -> MoveDirection.BACKWARD;
                          case "l" -> MoveDirection.LEFT;
                          case "r" -> MoveDirection.RIGHT;
-                         default -> throw new IllegalArgumentException("Unknown move direction: " + dir);
+                         default -> null;
                      };
-                     i += 1;
+
+                     i = moveDirections[i] != null ? i + 1: i;
                  }
              }
-             return moveDirections;
+             return Arrays.copyOfRange(moveDirections, 0, i);
 
     }
 }

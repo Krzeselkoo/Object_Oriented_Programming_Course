@@ -4,15 +4,14 @@ import agh.ics.oop.model.MoveDirection;
 
 public class World {
 
-    public static void run(MoveDirection[] direction) {
+    public static void run(MoveDirection[] directions) {
 
-        for(MoveDirection dir: direction){
+        for(MoveDirection dir: directions){
             String move = switch(dir){
                 case MoveDirection.FORWARD -> "Zwierzak idzie do przodu";
                 case MoveDirection.LEFT -> "Zwierzak skręca w lewo";
                 case MoveDirection.BACKWARD -> "Zwierzak idzie w tył";
                 case MoveDirection.RIGHT -> "Zwierzak skręca w prawo";
-                default -> null;
             };
 
             System.out.println(move);
