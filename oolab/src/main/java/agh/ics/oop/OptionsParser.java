@@ -8,7 +8,7 @@ public class OptionsParser {
     public static MoveDirection[] convert(String[] dirChars) {
              MoveDirection[] moveDirections = new MoveDirection[dirChars.length];
              int i = 0;
-             for(String dir: dirChars){git status
+             for(String dir: dirChars){
                    moveDirections[i] = switch (dir) {
                          case "f" -> MoveDirection.FORWARD;
                          case "b" -> MoveDirection.BACKWARD;
