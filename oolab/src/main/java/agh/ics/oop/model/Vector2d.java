@@ -30,7 +30,7 @@ public class Vector2d {
         }
 
         public Vector2d lowerLeft(Vector2d other){
-            return new Vector2d(Math.min(x, other.x), Math.max(y, other.y));
+            return new Vector2d(Math.min(x, other.x), Math.min(y, other.y));
         }
 
         public Vector2d opposite(){
@@ -39,15 +39,21 @@ public class Vector2d {
 
         @Override
         public boolean equals(Object other){
-            if(other instanceof Vector2d otherVector){
-                return this.x == otherVector.x && this.y == otherVector.y;
+
+            if (other == this){
+                return true;
             }
-            return false;
+
+            if(!(other instanceof Vector2d otherVector)){
+                return false;
+            }
+
+            return Integer.compare(x, otherVector.x) == 0 && Integer.compare(y, otherVector.y) == 0;
         }
 
         @Override
         public String toString(){
-            return "(" + x + ", " + y + ")";
+            return "(" + x + "," + y + ")";
         }
 
         public int getX() {

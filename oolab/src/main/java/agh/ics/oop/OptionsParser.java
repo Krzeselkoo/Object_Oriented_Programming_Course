@@ -5,10 +5,10 @@ import agh.ics.oop.model.MoveDirection;
 import java.util.Arrays;
 
 public class OptionsParser {
-    public static MoveDirection[] convert(String[] args) {
-             MoveDirection[] moveDirections = new MoveDirection[args.length];
+    public static MoveDirection[] convert(String[] dirChars) {
+             MoveDirection[] moveDirections = new MoveDirection[dirChars.length];
              int i = 0;
-             for(String dir: args){
+             for(String dir: dirChars){git status
                    moveDirections[i] = switch (dir) {
                          case "f" -> MoveDirection.FORWARD;
                          case "b" -> MoveDirection.BACKWARD;
