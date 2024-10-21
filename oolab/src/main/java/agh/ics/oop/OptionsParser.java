@@ -9,17 +9,15 @@ public class OptionsParser {
              MoveDirection[] moveDirections = new MoveDirection[args.length];
              int i = 0;
              for(String dir: args){
-                 if(!dir.isEmpty()) {
-                     moveDirections[i] = switch (dir) {
+                   moveDirections[i] = switch (dir) {
                          case "f" -> MoveDirection.FORWARD;
                          case "b" -> MoveDirection.BACKWARD;
                          case "l" -> MoveDirection.LEFT;
                          case "r" -> MoveDirection.RIGHT;
                          default -> null;
-                     };
+                   };
 
-                     i = moveDirections[i] != null ? i + 1: i;
-                 }
+                   i = moveDirections[i] != null ? i + 1: i;
              }
              return Arrays.copyOfRange(moveDirections, 0, i);
 

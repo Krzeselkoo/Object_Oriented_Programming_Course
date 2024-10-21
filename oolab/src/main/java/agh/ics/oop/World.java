@@ -4,7 +4,7 @@ import agh.ics.oop.model.MoveDirection;
 
 public class World {
 
-    public static void run(MoveDirection[] directions) {
+    private static void run(MoveDirection[] directions) {
 
         for(MoveDirection dir: directions){
             String move = switch(dir){
