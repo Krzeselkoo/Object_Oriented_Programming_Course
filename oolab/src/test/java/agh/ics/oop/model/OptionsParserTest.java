@@ -8,49 +8,124 @@ import java.util.Arrays;
 
 public class OptionsParserTest {
 
+    //testing each single correct case
+
     @Test
-    public void singleArgsTest(){
+    void forwardMovement(){
+        String[] inputList = {"f"};
 
-        Assertions.assertEquals(OptionsParser.convert(new String[]{"f"})[0], MoveDirection.FORWARD);
-        Assertions.assertEquals(OptionsParser.convert(new String[]{"b"})[0], MoveDirection.BACKWARD);
-        Assertions.assertEquals(OptionsParser.convert(new String[]{"l"})[0], MoveDirection.LEFT);
-        Assertions.assertEquals(OptionsParser.convert(new String[]{"r"})[0], MoveDirection.RIGHT);
+        MoveDirection direction = OptionsParser.convert(inputList)[0];
 
+        Assertions.assertEquals(MoveDirection.FORWARD, direction);
+    }
+
+    @Test
+    void backwardMovement(){
+        String[] inputList = {"b"};
+
+        MoveDirection direction = OptionsParser.convert(inputList)[0];
+
+        Assertions.assertEquals(MoveDirection.BACKWARD, direction);
+    }
+
+    @Test
+    void rightMovement(){
+        String[] inputList = {"r"};
+
+        MoveDirection direction = OptionsParser.convert(inputList)[0];
+
+        Assertions.assertEquals(MoveDirection.RIGHT, direction);
+    }
+
+    @Test
+    void leftMovement(){
+        String[] inputList = {"l"};
+
+        MoveDirection direction = OptionsParser.convert(inputList)[0];
+
+        Assertions.assertEquals(MoveDirection.LEFT, direction);
+    }
+
+    //testing single wrong cases
+
+    @Test
+    void wrongDirection(){
+        String[] direction = {"t"};
         MoveDirection[] emptyArray = {};
 
-        Assertions.assertArrayEquals(
-                OptionsParser.convert(new String[]{"t"}),
-                emptyArray
-        );
+        MoveDirection[] directions = OptionsParser.convert(direction);
 
         Assertions.assertArrayEquals(
-                OptionsParser.convert(new String[]{""}),
-                emptyArray
+                emptyArray,
+                directions
+        );
+    }
+    @Test
+    void emptyStringPassed(){
+        String[] direction = {""};
+        MoveDirection[] emptyArray = {};
+
+        MoveDirection[] directions = OptionsParser.convert(direction);
+
+        Assertions.assertArrayEquals(
+                emptyArray,
+                directions
+        );
+    }
+    @Test
+    void emptyStringListPassed(){
+        String[] direction = {};
+        MoveDirection[] emptyArray = {};
+
+        MoveDirection[] directions = OptionsParser.convert(direction);
+
+        Assertions.assertArrayEquals(
+                emptyArray,
+                directions
+        );
+    }
+
+    //Testing multiple instructions
+
+    @Test
+    void allGoodDirections(){
+        String[] directions = {"f", "b", "r", "l"};
+        MoveDirection[] correctOutcome = {MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.RIGHT, MoveDirection.LEFT};
+
+        MoveDirection[] convertedDirs = OptionsParser.convert(directions);
+
+        Assertions.assertArrayEquals(
+                correctOutcome,
+                convertedDirs
+        );
+    }
+
+    @Test
+    void mostGoodDirections(){
+        String[] directions = {"f","t","b","t"};
+        MoveDirection[] correctOutcome = {MoveDirection.FORWARD, MoveDirection.BACKWARD};
+
+        MoveDirection[] convertedDirs = OptionsParser.convert(directions);
+
+        Assertions.assertArrayEquals(
+                correctOutcome,
+                convertedDirs
         );
 
     }
 
     @Test
-    public void multipleArgsTest(){
+    void allWrongDirections(){
+        String[] directions = {"o","i","k","t"};
+        MoveDirection[] correctOutcome = {};
+
+        MoveDirection[] convertedDirs = OptionsParser.convert(directions);
 
         Assertions.assertArrayEquals(
-                OptionsParser.convert(new String[]{"f", "b", "r", "l"}),
-                new MoveDirection[]{MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.RIGHT, MoveDirection.LEFT}
+                correctOutcome,
+                convertedDirs
+
         );
-
-        Assertions.assertArrayEquals(
-                OptionsParser.convert(new String[]{"f","t","b","t"}),
-                new MoveDirection[]{MoveDirection.FORWARD, MoveDirection.BACKWARD}
-        );
-
-
-        MoveDirection[] emptyArray = {};
-
-        Assertions.assertArrayEquals(
-                OptionsParser.convert(new String[]{"o","i","k","t"}),
-                emptyArray
-        );
-
     }
 
 }

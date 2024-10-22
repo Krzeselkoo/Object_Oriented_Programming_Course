@@ -5,93 +5,131 @@ import org.junit.jupiter.api.Test;
 
 public class Vector2dTest {
     @Test
-    public void equalsTest(){
+    void equalityTrue(){
         Vector2d vec1 = new Vector2d(1, 2);
         Vector2d vec2 = new Vector2d(1, 2);
-        Vector2d vec3 = new Vector2d(2, 1);
 
-        Assertions.assertEquals(vec1, vec2);
-        Assertions.assertNotEquals(vec1, vec3);
+        boolean vectorsAreEqual = vec1.equals(vec2);
+
+        Assertions.assertTrue(vectorsAreEqual);
     }
 
     @Test
-    public void toStringTest(){
+    void equalityFalse(){
+        Vector2d vec1 = new Vector2d(1, 2);
+        Vector2d vec2 = new Vector2d(2, 1);
+
+        boolean vectorsAreEqual = vec1.equals(vec2);
+
+        Assertions.assertFalse(vectorsAreEqual);
+    }
+
+    @Test
+    void toStringOutput(){
         Vector2d vec1 = new Vector2d(0,0);
 
-        Assertions.assertEquals(vec1.toString(), "(0,0)");
+        String outcome = vec1.toString();
+
+        Assertions.assertEquals("(0,0)", vec1.toString());
     }
 
     @Test
-    public void precedesTest(){
+    void precedesTrue(){
         Vector2d vec1 = new Vector2d(1,2);
         Vector2d vec2 = new Vector2d(2,2);
 
-        Assertions.assertTrue(vec1.precedes(vec2));
-        Assertions.assertFalse(vec2.precedes(vec1));
+        boolean outcome = vec1.precedes(vec2);
+
+        Assertions.assertTrue(outcome);
     }
 
     @Test
-    public void followsTest(){
+    void precedesFalse(){
         Vector2d vec1 = new Vector2d(1,2);
         Vector2d vec2 = new Vector2d(2,2);
 
-        Assertions.assertTrue(vec2.follows(vec1));
-        Assertions.assertFalse(vec1.follows(vec2));
+        boolean outcome = vec2.precedes(vec1);
+
+        Assertions.assertFalse(outcome);
+    }
+
+
+    @Test
+    void followsTrue(){
+        Vector2d vec1 = new Vector2d(1,2);
+        Vector2d vec2 = new Vector2d(2,2);
+
+        boolean outcome = vec2.follows(vec1);
+
+        Assertions.assertTrue(outcome);
     }
 
     @Test
-    public void upperRightTest(){
+    void followsFalse(){
+        Vector2d vec1 = new Vector2d(1,2);
+        Vector2d vec2 = new Vector2d(2,2);
 
-        Vector2d vec1 = new Vector2d(0,0);
-        Vector2d vec2 = new Vector2d(0,1);
+        boolean outcome = vec1.follows(vec2);
 
-        Assertions.assertEquals(vec1.upperRight(vec2), new Vector2d(0, 1));
+        Assertions.assertFalse(outcome);
+    }
 
-        Vector2d vec3 = new Vector2d(1,2);
-        Vector2d vec4 = new Vector2d(4,1);
 
-        Assertions.assertEquals(vec3.upperRight(vec4), new Vector2d(4, 2));
+
+    @Test
+    void upperRightCorner(){
+        Vector2d vec1 = new Vector2d(1,2);
+        Vector2d vec2 = new Vector2d(4,1);
+        Vector2d corner = new Vector2d(4, 2);
+
+        Vector2d calculatedCorner = vec1.upperRight(vec2);
+
+        Assertions.assertEquals(corner, calculatedCorner);
 
     }
 
     @Test
-    public void lowerLeftTest(){
+    void lowerLeftCorner(){
+        Vector2d vec1 = new Vector2d(1,2);
+        Vector2d vec2 = new Vector2d(4,1);
+        Vector2d corner = new Vector2d(1, 1);
 
-        Vector2d vec1 = new Vector2d(0,0);
-        Vector2d vec2 = new Vector2d(0,1);
+        Vector2d calculatedCorner = vec1.lowerLeft(vec2);
 
-        Assertions.assertEquals(vec1.lowerLeft(vec2), new Vector2d(0, 0));
-
-        Vector2d vec3 = new Vector2d(1,2);
-        Vector2d vec4 = new Vector2d(4,1);
-
-        Assertions.assertEquals(vec3.lowerLeft(vec4), new Vector2d(1, 1));
+        Assertions.assertEquals(corner, calculatedCorner);
 
     }
 
     @Test
-    public void addTest(){
+    void additionOfVectors(){
         Vector2d vec1 = new Vector2d(1,2);
         Vector2d vec2 = new Vector2d(0,4);
+        Vector2d correctOutcome = new Vector2d(1, 6);
 
-        Assertions.assertEquals(vec1.add(vec2), new Vector2d(1, 6));
+        Vector2d calculatedOutcome = vec1.add(vec2);
+
+        Assertions.assertEquals(correctOutcome, calculatedOutcome);
     }
 
     @Test
-    public void subtractTest(){
+    void subtractTest(){
         Vector2d vec1 = new Vector2d(1,2);
         Vector2d vec2 = new Vector2d(0,4);
+        Vector2d correctOutcome = new Vector2d(1, -2);
 
-        Assertions.assertEquals(vec1.subtract(vec2), new Vector2d(1, -2));
+        Vector2d calculatedOutcome = vec1.subtract(vec2);
+
+        Assertions.assertEquals(correctOutcome, calculatedOutcome);
     }
 
     @Test
-    public void oppositeTest(){
+    void oppositeTest(){
         Vector2d vec1 = new Vector2d(1,2);
-        Assertions.assertEquals(vec1.opposite(), new Vector2d(-1, -2));
+        Vector2d vec1Opposite = new Vector2d(-1, -2);
 
-        Vector2d vec2 = new Vector2d(0,0);
-        Assertions.assertEquals(vec2.opposite(), new Vector2d(0, 0));
+        Vector2d calculatedOpposite = vec1.opposite();
+
+        Assertions.assertEquals(vec1Opposite, calculatedOpposite);
     }
 
 }
