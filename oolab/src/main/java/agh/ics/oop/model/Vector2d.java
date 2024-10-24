@@ -9,28 +9,28 @@ public class Vector2d {
             this.y = y;
         }
 
-        public boolean precedes(Vector2d vector) {
-            return this.x <= vector.x && this.y <= vector.y;
+        public boolean precedes(Vector2d other) {
+            return x <= other.getX() && y <= other.getY();
         }
 
-        public boolean follows(Vector2d vector) {
-            return this.x >= vector.x && this.y >= vector.y;
+        public boolean follows(Vector2d other) {
+            return x >= other.getX() && y >= other.getY();
         }
 
-        public Vector2d add(Vector2d vector) {
-            return new Vector2d(x + vector.x, y + vector.y);
+        public Vector2d add(Vector2d other) {
+            return new Vector2d(x + other.getX(), y + other.getY());
         }
 
-        public Vector2d subtract(Vector2d vector) {
-            return new Vector2d(x - vector.x, y - vector.y);
+        public Vector2d subtract(Vector2d other) {
+            return new Vector2d(x - other.getX(), y - other.getY());
         }
 
         public Vector2d upperRight(Vector2d other){
-            return new Vector2d(Math.max(x, other.x), Math.max(y, other.y));
+            return new Vector2d(Math.max(x, other.getX()), Math.max(y, other.getY()));
         }
 
         public Vector2d lowerLeft(Vector2d other){
-            return new Vector2d(Math.min(x, other.x), Math.min(y, other.y));
+            return new Vector2d(Math.min(x, other.getX()), Math.min(y, other.getY()));
         }
 
         public Vector2d opposite(){
@@ -48,7 +48,7 @@ public class Vector2d {
                 return false;
             }
 
-            return Integer.compare(x, otherVector.x) == 0 && Integer.compare(y, otherVector.y) == 0;
+            return Integer.compare(getX(), otherVector.getX()) == 0 && Integer.compare(getY(), otherVector.getY()) == 0;
         }
 
         @Override

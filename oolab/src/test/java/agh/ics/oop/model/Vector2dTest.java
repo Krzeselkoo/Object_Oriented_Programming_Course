@@ -4,8 +4,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class Vector2dTest {
+
+    //.equals() tests
+
     @Test
-    void equalityTrue(){
+    void equalityDifferentVectorObjectSameAttributes(){
         Vector2d vec1 = new Vector2d(1, 2);
         Vector2d vec2 = new Vector2d(1, 2);
 
@@ -15,7 +18,26 @@ public class Vector2dTest {
     }
 
     @Test
-    void equalityFalse(){
+    void equalitySameObjectReferences(){
+        Vector2d vec1 = new Vector2d(1, 2);
+        Vector2d vec2 = vec1;
+
+        boolean vectorsAreEqual = vec1.equals(vec2);
+
+        Assertions.assertTrue(vectorsAreEqual);
+    }
+
+    @Test
+    void equalityNull(){
+        Vector2d vec1 = new Vector2d(1, 2);
+
+        boolean vectorsAreEqual = vec1.equals(null);
+
+        Assertions.assertFalse(vectorsAreEqual);
+    }
+
+    @Test
+    void equalityDifferentVector(){
         Vector2d vec1 = new Vector2d(1, 2);
         Vector2d vec2 = new Vector2d(2, 1);
 
@@ -25,13 +47,27 @@ public class Vector2dTest {
     }
 
     @Test
+    void equalityDifferentObject(){
+        Vector2d vec1 = new Vector2d(1, 2);
+        Object o = new Object();
+
+        boolean vectorsAreEqual = vec1.equals(o);
+
+        Assertions.assertFalse(vectorsAreEqual);
+    }
+
+    //.toString() test
+
+    @Test
     void toStringOutput(){
-        Vector2d vec1 = new Vector2d(0,0);
+        Vector2d vec1 = new Vector2d(-1,1);
 
         String outcome = vec1.toString();
 
-        Assertions.assertEquals("(0,0)", vec1.toString());
+        Assertions.assertEquals("(-1,1)", vec1.toString());
     }
+
+    //.precedes() tests
 
     @Test
     void precedesTrue(){
@@ -53,6 +89,7 @@ public class Vector2dTest {
         Assertions.assertFalse(outcome);
     }
 
+    //.follows() tests
 
     @Test
     void followsTrue(){
@@ -74,7 +111,8 @@ public class Vector2dTest {
         Assertions.assertFalse(outcome);
     }
 
-
+    //.upperRight() test. It should output the upper right corner of a rectangle which vertices are points v1, v2.
+    //If the points are on the same x or y coordinate, it should return the one further to the right.
 
     @Test
     void upperRightCorner(){
@@ -85,8 +123,10 @@ public class Vector2dTest {
         Vector2d calculatedCorner = vec1.upperRight(vec2);
 
         Assertions.assertEquals(corner, calculatedCorner);
-
     }
+
+    //.lowerLeft() test. It should output the lower left corner of a rectangle, which vertices are points v1, v2.
+    //If the points are on the same x or y coordinate, it should return the one further to the left.
 
     @Test
     void lowerLeftCorner(){
@@ -97,8 +137,9 @@ public class Vector2dTest {
         Vector2d calculatedCorner = vec1.lowerLeft(vec2);
 
         Assertions.assertEquals(corner, calculatedCorner);
-
     }
+
+    //.add() test
 
     @Test
     void additionOfVectors(){
@@ -111,6 +152,8 @@ public class Vector2dTest {
         Assertions.assertEquals(correctOutcome, calculatedOutcome);
     }
 
+    //.subtract() test
+
     @Test
     void subtractTest(){
         Vector2d vec1 = new Vector2d(1,2);
@@ -121,6 +164,8 @@ public class Vector2dTest {
 
         Assertions.assertEquals(correctOutcome, calculatedOutcome);
     }
+
+    //.opposite() test
 
     @Test
     void oppositeTest(){

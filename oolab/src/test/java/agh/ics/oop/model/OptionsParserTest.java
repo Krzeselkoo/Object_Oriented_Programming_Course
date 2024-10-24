@@ -60,6 +60,7 @@ public class OptionsParserTest {
                 directions
         );
     }
+
     @Test
     void emptyStringPassed(){
         String[] direction = {""};
@@ -72,6 +73,7 @@ public class OptionsParserTest {
                 directions
         );
     }
+
     @Test
     void emptyStringListPassed(){
         String[] direction = {};
