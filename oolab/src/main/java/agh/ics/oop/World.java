@@ -34,6 +34,5 @@ public class World {
         System.out.println(MapDirection.next(MapDirection.NORTH)+", expected EAST");
         System.out.println(MapDirection.previous(MapDirection.NORTH)+", expected WEST");
         System.out.println(MapDirection.toUnitVector(MapDirection.NORTH)+", expected (0,1)");
-
     }
 }
