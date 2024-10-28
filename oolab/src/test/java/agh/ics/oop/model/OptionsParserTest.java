@@ -3,8 +3,11 @@ package agh.ics.oop.model;
 import agh.ics.oop.OptionsParser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.w3c.dom.ls.LSInput;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class OptionsParserTest {
 
@@ -14,7 +17,7 @@ public class OptionsParserTest {
     void forwardMovement(){
         String[] inputList = {"f"};
 
-        MoveDirection direction = OptionsParser.convert(inputList)[0];
+        MoveDirection direction = OptionsParser.convert(inputList).get(0);
 
         Assertions.assertEquals(MoveDirection.FORWARD, direction);
     }
@@ -23,7 +26,7 @@ public class OptionsParserTest {
     void backwardMovement(){
         String[] inputList = {"b"};
 
-        MoveDirection direction = OptionsParser.convert(inputList)[0];
+        MoveDirection direction = OptionsParser.convert(inputList).get(0);
 
         Assertions.assertEquals(MoveDirection.BACKWARD, direction);
     }
@@ -32,7 +35,7 @@ public class OptionsParserTest {
     void rightMovement(){
         String[] inputList = {"r"};
 
-        MoveDirection direction = OptionsParser.convert(inputList)[0];
+        MoveDirection direction = OptionsParser.convert(inputList).get(0);
 
         Assertions.assertEquals(MoveDirection.RIGHT, direction);
     }
@@ -41,7 +44,7 @@ public class OptionsParserTest {
     void leftMovement(){
         String[] inputList = {"l"};
 
-        MoveDirection direction = OptionsParser.convert(inputList)[0];
+        MoveDirection direction = OptionsParser.convert(inputList).get(0);
 
         Assertions.assertEquals(MoveDirection.LEFT, direction);
     }
@@ -51,40 +54,31 @@ public class OptionsParserTest {
     @Test
     void wrongDirection(){
         String[] direction = {"t"};
-        MoveDirection[] emptyArray = {};
+        List<MoveDirection> emptyArray = List.of();
 
-        MoveDirection[] directions = OptionsParser.convert(direction);
+        List<MoveDirection> directions = OptionsParser.convert(direction);
 
-        Assertions.assertArrayEquals(
-                emptyArray,
-                directions
-        );
+        Assertions.assertEquals(emptyArray, directions);
     }
 
     @Test
     void emptyStringPassed(){
         String[] direction = {""};
-        MoveDirection[] emptyArray = {};
+        List<MoveDirection> emptyArray = List.of();
 
-        MoveDirection[] directions = OptionsParser.convert(direction);
+        List<MoveDirection> directions = OptionsParser.convert(direction);
 
-        Assertions.assertArrayEquals(
-                emptyArray,
-                directions
-        );
+        Assertions.assertEquals(emptyArray, directions);
     }
 
     @Test
     void emptyStringListPassed(){
         String[] direction = {};
-        MoveDirection[] emptyArray = {};
+        List<MoveDirection> emptyArray = List.of();
 
-        MoveDirection[] directions = OptionsParser.convert(direction);
+        List<MoveDirection> directions = OptionsParser.convert(direction);
 
-        Assertions.assertArrayEquals(
-                emptyArray,
-                directions
-        );
+        Assertions.assertEquals(emptyArray, directions);
     }
 
     //Testing multiple instructions
@@ -92,42 +86,32 @@ public class OptionsParserTest {
     @Test
     void allGoodDirections(){
         String[] directions = {"f", "b", "r", "l"};
-        MoveDirection[] correctOutcome = {MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.RIGHT, MoveDirection.LEFT};
+        List<MoveDirection> correctOutcome = Arrays.asList(MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.RIGHT, MoveDirection.LEFT);
 
-        MoveDirection[] convertedDirs = OptionsParser.convert(directions);
+        List<MoveDirection> convertedDirs = OptionsParser.convert(directions);
 
-        Assertions.assertArrayEquals(
-                correctOutcome,
-                convertedDirs
-        );
+        Assertions.assertEquals(correctOutcome, convertedDirs);
     }
 
     @Test
     void mostGoodDirections(){
         String[] directions = {"f","t","b","t"};
-        MoveDirection[] correctOutcome = {MoveDirection.FORWARD, MoveDirection.BACKWARD};
+        List<MoveDirection> correctOutcome = Arrays.asList(MoveDirection.FORWARD, MoveDirection.BACKWARD);
 
-        MoveDirection[] convertedDirs = OptionsParser.convert(directions);
+        List<MoveDirection> convertedDirs = OptionsParser.convert(directions);
 
-        Assertions.assertArrayEquals(
-                correctOutcome,
-                convertedDirs
-        );
+        Assertions.assertEquals(correctOutcome, convertedDirs);
 
     }
 
     @Test
     void allWrongDirections(){
         String[] directions = {"o","i","k","t"};
-        MoveDirection[] correctOutcome = {};
+        List<MoveDirection> correctOutcome = List.of();
 
-        MoveDirection[] convertedDirs = OptionsParser.convert(directions);
+        List<MoveDirection> convertedDirs = OptionsParser.convert(directions);
 
-        Assertions.assertArrayEquals(
-                correctOutcome,
-                convertedDirs
-
-        );
+        Assertions.assertEquals(correctOutcome, convertedDirs);
     }
 
 }

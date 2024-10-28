@@ -1,10 +1,11 @@
 package agh.ics.oop;
 
+import agh.ics.oop.model.Animal;
 import agh.ics.oop.model.MapDirection;
 import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
 
-public class World {
+public class    World {
 
     private static void run(MoveDirection[] directions) {
 
@@ -22,17 +23,8 @@ public class World {
     }
 
     public static void main(String[] args) {
-
-        Vector2d position1 = new Vector2d(1,2);
-        System.out.println(position1);
-        Vector2d position2 = new Vector2d(-2,1);
-        System.out.println(position2);
-        System.out.println(position1.add(position2));
-
-        System.out.println();
-
-        System.out.println(MapDirection.next(MapDirection.NORTH)+", expected EAST");
-        System.out.println(MapDirection.previous(MapDirection.NORTH)+", expected WEST");
-        System.out.println(MapDirection.toUnitVector(MapDirection.NORTH)+", expected (0,1)");
+        Animal zwierz = new Animal();
+        System.out.println(zwierz.toString());
+        System.out.println(OptionsParser.convert(new String[]{"f", "b", "r", "l", "T"}));
     }
 }
