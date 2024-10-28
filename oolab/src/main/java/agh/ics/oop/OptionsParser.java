@@ -20,6 +20,6 @@ public class OptionsParser {
                    i = moveDirections[i] != null ? i + 1: i;
              }
              return Arrays.copyOfRange(moveDirections, 0, i);
-
     }
+
 }

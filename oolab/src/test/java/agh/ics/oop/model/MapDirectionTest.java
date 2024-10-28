@@ -83,5 +83,24 @@ public class MapDirectionTest {
         assertEquals(MapDirection.SOUTH, westPrev);
     }
 
+    @Test
+    void northUnitVector(){
+        MapDirection north = MapDirection.NORTH;
+        Vector2d correctVec = new Vector2d(0, 1);
+
+        Vector2d unitVector = MapDirection.toUnitVector(north);
+
+        assertEquals(correctVec, unitVector);
+    }
+
+    @Test
+    void northToString(){
+        MapDirection north = MapDirection.NORTH;
+
+        String correctString = north.toString();
+
+        assertEquals("NORTH", correctString);
+    }
+
 }
 
