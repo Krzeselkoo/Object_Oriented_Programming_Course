@@ -7,9 +7,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class OptionsParser {
-    public static List<MoveDirection> convert(String[] dirChars) {
-             List<MoveDirection> moveDirections = new ArrayList<MoveDirection>();
+    public static List<MoveDirection> parse(String[] dirChars) {
+             List<MoveDirection> moveDirections = new ArrayList<>();
+
              for(String dir: dirChars){
+
                    MoveDirection direction = switch (dir) {
                          case "f" -> MoveDirection.FORWARD;
                          case "b" -> MoveDirection.BACKWARD;
@@ -20,7 +22,7 @@ public class OptionsParser {
 
                    if(direction != null) moveDirections.add(direction);
 
-                   }
+             }
              return moveDirections;
     }
 

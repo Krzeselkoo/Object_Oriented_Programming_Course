@@ -1,6 +1,7 @@
-package agh.ics.oop.model;
+package agh.ics.oop;
 
 import agh.ics.oop.OptionsParser;
+import agh.ics.oop.model.MoveDirection;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.ls.LSInput;
@@ -17,7 +18,7 @@ public class OptionsParserTest {
     void forwardMovement(){
         String[] inputList = {"f"};
 
-        MoveDirection direction = OptionsParser.convert(inputList).get(0);
+        MoveDirection direction = OptionsParser.parse(inputList).get(0);
 
         Assertions.assertEquals(MoveDirection.FORWARD, direction);
     }
@@ -26,7 +27,7 @@ public class OptionsParserTest {
     void backwardMovement(){
         String[] inputList = {"b"};
 
-        MoveDirection direction = OptionsParser.convert(inputList).get(0);
+        MoveDirection direction = OptionsParser.parse(inputList).get(0);
 
         Assertions.assertEquals(MoveDirection.BACKWARD, direction);
     }
@@ -35,7 +36,7 @@ public class OptionsParserTest {
     void rightMovement(){
         String[] inputList = {"r"};
 
-        MoveDirection direction = OptionsParser.convert(inputList).get(0);
+        MoveDirection direction = OptionsParser.parse(inputList).get(0);
 
         Assertions.assertEquals(MoveDirection.RIGHT, direction);
     }
@@ -44,7 +45,7 @@ public class OptionsParserTest {
     void leftMovement(){
         String[] inputList = {"l"};
 
-        MoveDirection direction = OptionsParser.convert(inputList).get(0);
+        MoveDirection direction = OptionsParser.parse(inputList).get(0);
 
         Assertions.assertEquals(MoveDirection.LEFT, direction);
     }
@@ -56,7 +57,7 @@ public class OptionsParserTest {
         String[] direction = {"t"};
         List<MoveDirection> emptyArray = List.of();
 
-        List<MoveDirection> directions = OptionsParser.convert(direction);
+        List<MoveDirection> directions = OptionsParser.parse(direction);
 
         Assertions.assertEquals(emptyArray, directions);
     }
@@ -66,7 +67,7 @@ public class OptionsParserTest {
         String[] direction = {""};
         List<MoveDirection> emptyArray = List.of();
 
-        List<MoveDirection> directions = OptionsParser.convert(direction);
+        List<MoveDirection> directions = OptionsParser.parse(direction);
 
         Assertions.assertEquals(emptyArray, directions);
     }
@@ -76,7 +77,7 @@ public class OptionsParserTest {
         String[] direction = {};
         List<MoveDirection> emptyArray = List.of();
 
-        List<MoveDirection> directions = OptionsParser.convert(direction);
+        List<MoveDirection> directions = OptionsParser.parse(direction);
 
         Assertions.assertEquals(emptyArray, directions);
     }
@@ -88,7 +89,7 @@ public class OptionsParserTest {
         String[] directions = {"f", "b", "r", "l"};
         List<MoveDirection> correctOutcome = Arrays.asList(MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.RIGHT, MoveDirection.LEFT);
 
-        List<MoveDirection> convertedDirs = OptionsParser.convert(directions);
+        List<MoveDirection> convertedDirs = OptionsParser.parse(directions);
 
         Assertions.assertEquals(correctOutcome, convertedDirs);
     }
@@ -98,7 +99,7 @@ public class OptionsParserTest {
         String[] directions = {"f","t","b","t"};
         List<MoveDirection> correctOutcome = Arrays.asList(MoveDirection.FORWARD, MoveDirection.BACKWARD);
 
-        List<MoveDirection> convertedDirs = OptionsParser.convert(directions);
+        List<MoveDirection> convertedDirs = OptionsParser.parse(directions);
 
         Assertions.assertEquals(correctOutcome, convertedDirs);
 
@@ -109,7 +110,7 @@ public class OptionsParserTest {
         String[] directions = {"o","i","k","t"};
         List<MoveDirection> correctOutcome = List.of();
 
-        List<MoveDirection> convertedDirs = OptionsParser.convert(directions);
+        List<MoveDirection> convertedDirs = OptionsParser.parse(directions);
 
         Assertions.assertEquals(correctOutcome, convertedDirs);
     }
