@@ -7,9 +7,10 @@ public class Animal {
     public final static Vector2d TOP_RIGHT_CORNER = new Vector2d(4,4);
     public final static Vector2d LOW_LEFT_CORNER = new Vector2d(0,0);
     public final static Vector2d DEFAULT_STARTING_POSITION = new Vector2d(2, 2);
+
     public Animal(Vector2d position) {
 
-        if(position.precedes(TOP_RIGHT_CORNER) && position.follows(LOW_LEFT_CORNER)) {
+        if(position.precedes(TOP_RIGHT_CORNER) && position.follows(RectangularMap.LOW_LEFT_CORNER)) {
             this.position = position;
         }else{
             this.position = DEFAULT_STARTING_POSITION;
@@ -23,25 +24,25 @@ public class Animal {
     }
 
     public String toString(){
-        return "%s %s".formatted(position.toString(), orientation.toString());
+        return "%s %s".formatted(position, orientation);
     }
 
     public boolean isAt(Vector2d position){
         return this.position.equals(position);
     }
 
-    public void move(MoveDirection direction){
+    public void move(MoveDirection direction, MoveValidator moveValidator){
         if(direction != null) {
             switch (direction) {
                 case FORWARD -> {
                     Vector2d newPosition = position.add(MapDirection.toUnitVector(orientation));
-                    if (newPosition.precedes(TOP_RIGHT_CORNER) && newPosition.follows(LOW_LEFT_CORNER)) {
+                    if (moveValidator.canMoveTo(newPosition)) {
                         position = newPosition;
                     }
                 }
                 case BACKWARD -> {
                     Vector2d newPosition = position.subtract(MapDirection.toUnitVector(orientation));
-                    if (newPosition.precedes(TOP_RIGHT_CORNER) && newPosition.follows(LOW_LEFT_CORNER)) {
+                    if (moveValidator.canMoveTo(newPosition)) {
                         position = newPosition;
                     }
                 }
@@ -55,4 +56,5 @@ public class Animal {
         return orientation;
     }
 
+    public Vector2d getPosition(){ return position; };
 }
