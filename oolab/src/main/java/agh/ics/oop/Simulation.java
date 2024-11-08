@@ -7,19 +7,19 @@ import java.util.List;
 
 public class Simulation {
 
-    private final List<Animal> animals;
-    private final List<MoveDirection> moves;
+    private final List<> animals;
+    private final List moves;
     private final WorldMap worldMap;
     private int animalsCount = 0;
-    public Simulation(List<Vector2d> animalPositions, List<MoveDirection> moves, WorldMap worldMap) {
+    public <T,P> Simulation(List<P> animalPositions, List<T> moves, WorldMap<T,P> worldMap) {
         this.animals = spawnAnimals(animalPositions);
         this.moves = moves;
         this.worldMap = worldMap;
     }
 
-    private List<Animal> spawnAnimals(List<Vector2d> positions){
+    private List<Animal> spawnAnimals(List positions){
         List<Animal> animals = new ArrayList<>();
-        for(Vector2d position: positions){
+        for(Object position: positions){
             animals.add(new Animal(position));
         }
         return animals;
