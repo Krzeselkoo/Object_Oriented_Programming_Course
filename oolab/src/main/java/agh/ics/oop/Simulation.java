@@ -39,16 +39,12 @@ public class Simulation {
         if(animalsCount > 0){
             int i = 0;
             for (MoveDirection move : moves) {
-
                 Animal animal = placedAnimals.get(i);
+                worldMap.move(animal, move);
 
-                if( animal != null) {
-                    worldMap.move(animal, move);
-                }
+                i = i + 1 == animalsCount ? 0 : i+1;
 
                 System.out.println(worldMap);
-
-                i = i + 1 == placedAnimals.size() ? 0 : i+1;
             }
         }
     }
