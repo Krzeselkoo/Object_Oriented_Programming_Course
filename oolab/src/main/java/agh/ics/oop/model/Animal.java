@@ -1,21 +1,16 @@
 package agh.ics.oop.model;
 
+import java.util.Objects;
+
 public class Animal {
+
     private MapDirection orientation;
     private Vector2d position;
 
-    public final static Vector2d TOP_RIGHT_CORNER = new Vector2d(4,4);
-    public final static Vector2d LOW_LEFT_CORNER = new Vector2d(0,0);
     public final static Vector2d DEFAULT_STARTING_POSITION = new Vector2d(2, 2);
 
     public Animal(Vector2d position) {
-
-        if(position.precedes(TOP_RIGHT_CORNER) && position.follows(RectangularMap.LOW_LEFT_CORNER)) {
-            this.position = position;
-        }else{
-            this.position = DEFAULT_STARTING_POSITION;
-        }
-
+        this.position = position;
         this.orientation = MapDirection.NORTH;
     }
 
@@ -24,7 +19,7 @@ public class Animal {
     }
 
     public String toString(){
-        return "%s %s".formatted(position, orientation);
+        return orientation.getArrow();
     }
 
     public boolean isAt(Vector2d position){
@@ -57,4 +52,18 @@ public class Animal {
     }
 
     public Vector2d getPosition(){ return position; };
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Animal animal = (Animal) o;
+        return orientation == animal.orientation && Objects.equals(position, animal.position);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orientation, position);
+    }
+
 }

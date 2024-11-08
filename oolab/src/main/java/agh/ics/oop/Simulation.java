@@ -1,9 +1,6 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.Animal;
-import agh.ics.oop.model.MoveDirection;
-import agh.ics.oop.model.Vector2d;
-import agh.ics.oop.model.WorldMap;
+import agh.ics.oop.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +10,7 @@ public class Simulation {
     private final List<Animal> animals;
     private final List<MoveDirection> moves;
     private final WorldMap worldMap;
-
+    private int animalsCount = 0;
     public Simulation(List<Vector2d> animalPositions, List<MoveDirection> moves, WorldMap worldMap) {
         this.animals = spawnAnimals(animalPositions);
         this.moves = moves;
@@ -37,29 +34,30 @@ public class Simulation {
             }
         }
 
-        int i = 0;
-        for (MoveDirection move : moves) {
-            worldMap.move(animals.get(index), move);
+        animalsCount = placedAnimals.size();
+
+        if(animalsCount > 0){
+            int i = 0;
+            for (MoveDirection move : moves) {
+
+                Animal animal = placedAnimals.get(i);
+
+                if( animal != null) {
+                    worldMap.move(animal, move);
+                }
+
+                System.out.println(worldMap);
+
+                i = i + 1 == placedAnimals.size() ? 0 : i+1;
+            }
         }
-//        if(!animals.isEmpty()) {
-//            int i = 0;
-//            for (MoveDirection direction : moves) {
-//                animals.get(i).move(direction);
-//
-//                String animalString = animals.get(i).toString();
-//                System.out.printf(
-//                        "Zwierzę %d : %s\n".formatted(
-//                        i + 1,
-//                        animalString
-//                        )
-//                );
-//
-//                i = i + 1 == animals.size() ? 0 : i + 1;
-//            }
-//        }
     }
 
     public List<Animal> getAnimals(){
         return List.copyOf(animals);
+    }
+
+    public int getAnimalsCount(){
+        return animalsCount;
     }
 }
