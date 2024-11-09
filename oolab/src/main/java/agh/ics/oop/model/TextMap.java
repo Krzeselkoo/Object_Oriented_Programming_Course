@@ -5,7 +5,8 @@ import java.util.*;
 public class TextMap implements WorldNumberPositionMap<String>{
 
     //Moim głównym założeniem jest to, że nie ma duplikatów słów oraz
-    //uznajemy, że słowa dostają instrukcję
+    //uznajemy, że słowa dostają instrukcję w kolejności w jakiej są podane na początku
+    //(dodanie kolejnych słów powoduje dodanie je na koniec 'words')
 
     private final ArrayList<String> map;
     private final ArrayList<String> words;
