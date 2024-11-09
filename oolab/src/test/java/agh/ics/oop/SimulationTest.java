@@ -26,15 +26,18 @@ public class SimulationTest{
 
         Simulation simulation = new Simulation(positions, directions, rectangularMap);
         simulation.run();
-        List<Animal> animals = simulation.getAnimals();
+        List<?> animals = simulation.getAnimals();
+
+        Animal animal1 = (Animal) animals.getFirst();
+        Animal animal2 = (Animal) animals.get(1);
 
         Assertions.assertEquals(2, simulation.getAnimalsCount());
 
-        Assertions.assertEquals(MapDirection.EAST, animals.getFirst().getOrientation());
-        Assertions.assertTrue(animals.getFirst().isAt(firstFinishPosition));
+        Assertions.assertEquals(MapDirection.EAST, animal1.getOrientation());
+        Assertions.assertTrue(animal1.isAt(firstFinishPosition));
 
-        Assertions.assertEquals(MapDirection.WEST, animals.get(1).getOrientation());
-        Assertions.assertTrue(animals.get(1).isAt(secondFinishPosition));
+        Assertions.assertEquals(MapDirection.WEST, animal2.getOrientation());
+        Assertions.assertTrue(animal2.isAt(secondFinishPosition));
     }
 
     @Test
@@ -45,15 +48,18 @@ public class SimulationTest{
 
         Simulation simulation = new Simulation(positions, directions, rectangularMap);
         simulation.run();
-        List<Animal> animals = simulation.getAnimals();
+        List<?> animals = simulation.getAnimals();
+
+        Animal animal1 = (Animal) animals.getFirst();
+        Animal animal2 = (Animal) animals.get(1);
 
         Assertions.assertEquals(2, simulation.getAnimalsCount());
 
-        Assertions.assertEquals(MapDirection.EAST, animals.getFirst().getOrientation());
-        Assertions.assertTrue(animals.getFirst().isAt(firstFinishPosition));
+        Assertions.assertEquals(MapDirection.EAST, animal1.getOrientation());
+        Assertions.assertTrue(animal1.isAt(firstFinishPosition));
 
-        Assertions.assertEquals(MapDirection.WEST, animals.get(1).getOrientation());
-        Assertions.assertTrue(animals.get(1).isAt(secondFinishPosition));
+        Assertions.assertEquals(MapDirection.WEST, animal2.getOrientation());
+        Assertions.assertTrue(animal2.isAt(secondFinishPosition));
     }
 
     @Test
@@ -64,15 +70,18 @@ public class SimulationTest{
 
         Simulation simulation = new Simulation(positions, directions, rectangularMap);
         simulation.run();
-        List<Animal> animals = simulation.getAnimals();
+        List<?> animals = simulation.getAnimals();
+
+        Animal animal1 = (Animal) animals.getFirst();
+        Animal animal2 = (Animal) animals.get(1);
 
         Assertions.assertEquals(2, simulation.getAnimalsCount());
 
-        Assertions.assertEquals(MapDirection.NORTH, animals.getFirst().getOrientation());
-        Assertions.assertTrue(animals.getFirst().isAt(firstStartingPosition));
+        Assertions.assertEquals(MapDirection.NORTH, animal1.getOrientation());
+        Assertions.assertTrue(animal1.isAt(firstStartingPosition));
 
-        Assertions.assertEquals(MapDirection.NORTH, animals.get(1).getOrientation());
-        Assertions.assertTrue(animals.get(1).isAt(secondStartingPosition));
+        Assertions.assertEquals(MapDirection.NORTH, animal2.getOrientation());
+        Assertions.assertTrue(animal2.isAt(secondStartingPosition));
     }
 
     @Test
@@ -83,15 +92,18 @@ public class SimulationTest{
 
         Simulation simulation = new Simulation(positions, directions, rectangularMap);
         simulation.run();
-        List<Animal> animals = simulation.getAnimals();
+        List<?> animals = simulation.getAnimals();
+
+        Animal animal1 = (Animal) animals.getFirst();
+        Animal animal2 = (Animal) animals.get(1);
 
         Assertions.assertEquals(2, simulation.getAnimalsCount());
 
-        Assertions.assertEquals(MapDirection.NORTH, animals.getFirst().getOrientation());
-        Assertions.assertTrue(animals.getFirst().isAt(firstStartingPosition));
+        Assertions.assertEquals(MapDirection.NORTH, animal1.getOrientation());
+        Assertions.assertTrue(animal1.isAt(firstStartingPosition));
 
-        Assertions.assertEquals(MapDirection.NORTH, animals.get(1).getOrientation());
-        Assertions.assertTrue(animals.get(1).isAt(secondStartingPosition));
+        Assertions.assertEquals(MapDirection.NORTH, animal2.getOrientation());
+        Assertions.assertTrue(animal2.isAt(secondStartingPosition));
     }
 
     @Test
@@ -102,12 +114,14 @@ public class SimulationTest{
 
         Simulation simulation = new Simulation(positions, directions, rectangularMap);
         simulation.run();
-        List<Animal> animals = simulation.getAnimals();
+        List<?> animals = simulation.getAnimals();
+
+        Animal animal1 = (Animal) animals.getFirst();
 
         Assertions.assertEquals(1, simulation.getAnimalsCount());
 
-        Assertions.assertEquals(MapDirection.NORTH, animals.getFirst().getOrientation());
-        Assertions.assertTrue(animals.getFirst().isAt(firstFinishOutOfBoundariesPosition));
+        Assertions.assertEquals(MapDirection.NORTH, animal1.getOrientation());
+        Assertions.assertTrue(animal1.isAt(firstFinishOutOfBoundariesPosition));
     }
 
     @Test

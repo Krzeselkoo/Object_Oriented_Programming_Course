@@ -5,51 +5,35 @@ import agh.ics.oop.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Simulation {
+public class Simulation<T,P> {
 
-    private final List<> animals;
-    private final List moves;
-    private final WorldMap worldMap;
-    private int animalsCount = 0;
-    public <T,P> Simulation(List<P> animalPositions, List<T> moves, WorldMap<T,P> worldMap) {
-        this.animals = spawnAnimals(animalPositions);
+    private final List<T> animals;
+    private final List<MoveDirection> moves;
+    private final WorldMap<T,P> worldMap;
+    private int animalsCount;
+    public Simulation(List<P> animalPositions, List<MoveDirection> moves, WorldMap<T,P>  worldMap) {
         this.moves = moves;
         this.worldMap = worldMap;
-    }
-
-    private List<Animal> spawnAnimals(List positions){
-        List<Animal> animals = new ArrayList<>();
-        for(Object position: positions){
-            animals.add(new Animal(position));
-        }
-        return animals;
+        this.animals = worldMap.initialize(animalPositions);
+        animalsCount = animals.size();
     }
 
     public void run(){
-        List<Animal> placedAnimals = new ArrayList<>(animals.size());
-
-        for(Animal animal: animals){
-            if(worldMap.place(animal)){
-                placedAnimals.add(animal);
-            }
-        }
-
-        animalsCount = placedAnimals.size();
-
+        animalsCount = animals.size();
         if(animalsCount > 0){
             int i = 0;
             for (MoveDirection move : moves) {
-                Animal animal = placedAnimals.get(i);
-                worldMap.move(animal, move);
+                worldMap.move(animals.get(i), move);
 
                 i = i + 1 == animalsCount ? 0 : i+1;
 
                 System.out.println(worldMap);
             }
         }
+
     }
 
-    public List<Animal> getAnimals(){
+    public List<?> getAnimals(){
         return List.copyOf(animals);
     }
 
