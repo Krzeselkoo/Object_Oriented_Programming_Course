@@ -11,6 +11,7 @@ public class Simulation {
     private final List<MoveDirection> moves;
     private final WorldMap worldMap;
     private int animalsCount = 0;
+
     public Simulation(List<Vector2d> animalPositions, List<MoveDirection> moves, WorldMap worldMap) {
         this.animals = spawnAnimals(animalPositions);
         this.moves = moves;
@@ -26,6 +27,9 @@ public class Simulation {
     }
 
     public void run(){
+
+        //Zakładam, że metoda będzie wywołana tylko raz. W innym razie zmienię implementacje
+
         List<Animal> placedAnimals = new ArrayList<>(animals.size());
 
         for(Animal animal: animals){
