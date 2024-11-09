@@ -10,6 +10,7 @@ import java.util.Map;
 public class RectangularMap implements WorldMap<Animal, Vector2d>{
 
     public final static Vector2d LOW_LEFT_CORNER = new Vector2d(0,0);
+    private final ArrayList<Animal> animalsList = new ArrayList<>();
     private final Map<Vector2d, Animal> animals = new HashMap<>();
     private final Vector2d topRightCorner;
     private final MapVisualizer mapVisualizer;
@@ -22,18 +23,18 @@ public class RectangularMap implements WorldMap<Animal, Vector2d>{
 
     @Override
     public List<Animal> initialize(List<Vector2d> positions){
-        List<Animal> animals = new ArrayList<>();
+        if(animals.isEmpty()) {
+            for (Vector2d position : positions) {
+                if (canMoveTo(position)) {
+                    Animal animal = new Animal(position);
 
-        for(Vector2d position: positions){
-            if(canMoveTo(position)) {
-                Animal animal = new Animal(position);
-
-                animals.add(animal);
-                this.animals.put(position, animal);
+                    this.animalsList.add(animal);
+                    this.animals.put(position, animal);
+                }
             }
         }
 
-        return animals;
+        return animalsList;
     }
 
     @Override
@@ -41,6 +42,7 @@ public class RectangularMap implements WorldMap<Animal, Vector2d>{
 
         if(canMoveTo(animal.getPosition())){
             animals.put(animal.getPosition(), animal);
+            animalsList.add(animal);
             return true;
         }
 

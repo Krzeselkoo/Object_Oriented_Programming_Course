@@ -23,12 +23,15 @@ public class World {
     }
 
     public static void main(String[] args) {
-//
+
 //        List<MoveDirection> directions = OptionsParser.parse(args);
 //        List<Vector2d> positions = List.of(new Vector2d(0,0), new Vector2d(0,1), new Vector2d(0,2),new Vector2d(0,1));
 //        RectangularMap rectangularMap = new RectangularMap(3,3);
 //
 //        Simulation<Animal, Vector2d> simulation = new Simulation<>(positions, directions, rectangularMap);
+//        simulation.run();
+//
+//        rectangularMap.place(new Animal(new Vector2d(3,3)));
 //        simulation.run();
 
         ArrayList<String> words = new ArrayList<>(List.of("Ala", "ma", "sowoniedźwiedzia"));
