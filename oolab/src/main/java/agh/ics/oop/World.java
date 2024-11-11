@@ -29,6 +29,5 @@ public class World {
 
         Simulation simulation = new Simulation(positions, directions, rectangularMap);
         simulation.run();
-
     }
 }

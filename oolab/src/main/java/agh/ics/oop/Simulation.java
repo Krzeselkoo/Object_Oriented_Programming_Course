@@ -13,37 +13,31 @@ public class Simulation {
     private int animalsCount = 0;
 
     public Simulation(List<Vector2d> animalPositions, List<MoveDirection> moves, WorldMap worldMap) {
-        this.animals = spawnAnimals(animalPositions);
-        this.moves = moves;
         this.worldMap = worldMap;
+        this.moves = moves;
+        this.animals = spawnAnimals(animalPositions);
+        animalsCount = animals.size();
     }
 
     private List<Animal> spawnAnimals(List<Vector2d> positions){
         List<Animal> animals = new ArrayList<>();
+
         for(Vector2d position: positions){
-            animals.add(new Animal(position));
+            Animal animal = new Animal(position);
+            if(worldMap.place(animal)){
+                animals.add(animal);
+            }
         }
+
         return animals;
     }
 
     public void run(){
 
-        //Zakładam, że metoda będzie wywołana tylko raz. W innym razie zmienię implementacje
-
-        List<Animal> placedAnimals = new ArrayList<>(animals.size());
-
-        for(Animal animal: animals){
-            if(worldMap.place(animal)){
-                placedAnimals.add(animal);
-            }
-        }
-
-        animalsCount = placedAnimals.size();
-
         if(animalsCount > 0){
             int i = 0;
             for (MoveDirection move : moves) {
-                Animal animal = placedAnimals.get(i);
+                Animal animal = animals.get(i);
                 worldMap.move(animal, move);
 
                 i = i + 1 == animalsCount ? 0 : i+1;
@@ -51,6 +45,7 @@ public class Simulation {
                 System.out.println(worldMap);
             }
         }
+
     }
 
     public List<Animal> getAnimals(){
