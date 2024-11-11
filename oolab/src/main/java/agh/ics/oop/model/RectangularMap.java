@@ -23,6 +23,7 @@ public class RectangularMap implements WorldMap<Animal, Vector2d>{
 
     @Override
     public List<Animal> initialize(List<Vector2d> positions){
+
         if(animals.isEmpty()) {
             for (Vector2d position : positions) {
                 if (canMoveTo(position)) {

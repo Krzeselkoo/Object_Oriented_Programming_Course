@@ -33,7 +33,7 @@ public class Simulation<T,P> {
 
     }
 
-    public List<?> getAnimals(){
+    public List<T> getAnimals(){
         return List.copyOf(animals);
     }
 
