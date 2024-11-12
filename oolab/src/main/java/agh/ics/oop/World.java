@@ -38,7 +38,7 @@ public class World {
         TextMap textMap = new TextMap(words);
         List<MoveDirection> directions = OptionsParser.parse(args);
 
-        Simulation<String, Number> stringSimulation = new Simulation<>(List.of(), directions, textMap);
+        Simulation<String, Integer> stringSimulation = new Simulation<>(List.of(), directions, textMap);
         stringSimulation.run();
 
         System.out.println(textMap.place("Ala"));

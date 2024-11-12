@@ -2,7 +2,7 @@ package agh.ics.oop.model;
 
 import java.util.*;
 
-public class TextMap implements WorldNumberPositionMap<String>{
+public class TextMap implements WorldNumberPositionMap<String, Integer>{
 
     //Moim głównym założeniem jest to, że nie ma duplikatów słów oraz
     //uznajemy, że słowa dostają instrukcję w kolejności w jakiej są podane na początku
@@ -17,8 +17,8 @@ public class TextMap implements WorldNumberPositionMap<String>{
     }
 
     @Override
-    public boolean canMoveTo(Number position) {
-        return position.intValue() >= 0 && position.intValue() < map.size();
+    public boolean canMoveTo(Integer position) {
+        return position >= 0 && position < map.size();
     }
 
     @Override
@@ -55,17 +55,17 @@ public class TextMap implements WorldNumberPositionMap<String>{
     }
 
     @Override
-    public boolean isOccupied(Number position) {
-        return position.intValue() < map.size();
+    public boolean isOccupied(Integer position) {
+        return position < map.size();
     }
 
     @Override
-    public String objectAt(Number position) {
-        return map.get(position.intValue());
+    public String objectAt(Integer position) {
+        return map.get(position);
     }
 
     @Override
-    public List<String> initialize(List<Number> positions) {
+    public List<String> initialize(List<Integer> positions) {
         return words;
     }
 
