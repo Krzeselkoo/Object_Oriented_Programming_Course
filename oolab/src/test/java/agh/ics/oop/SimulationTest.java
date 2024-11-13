@@ -1,9 +1,6 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.Animal;
-import agh.ics.oop.model.MapDirection;
-import agh.ics.oop.model.MoveDirection;
-import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +11,8 @@ public class SimulationTest{
     private final Vector2d firstStartingPosition = new Vector2d(2,2);
     private final Vector2d secondStartingPosition = new Vector2d(3,4);
 
-    private final Vector2d firstFinishPosition = new Vector2d(3,3);
-    private final Vector2d secondFinishPosition = new Vector2d(2,3);
+    private final Vector2d firstFinishPosition = new Vector2d(2,3);
+    private final Vector2d secondFinishPosition = new Vector2d(3,3);
 
     private final Vector2d firstFinishOutOfBoundariesPosition = new Vector2d(2,4);
 
@@ -25,12 +22,13 @@ public class SimulationTest{
     void allCorrectInstructions(){
         List<MoveDirection> directions = OptionsParser.parse(new String[]{"f", "b", "r", "l", "f", "f"});
         List<Vector2d> positions = List.of(firstStartingPosition, secondStartingPosition);
+        RectangularMap rectangularMap = new RectangularMap(5,5);
 
-        Simulation simulation = new Simulation(positions, directions);
+        Simulation simulation = new Simulation(positions, directions, rectangularMap);
         simulation.run();
         List<Animal> animals = simulation.getAnimals();
 
-        Assertions.assertEquals(2, animals.size());
+        Assertions.assertEquals(2, simulation.getAnimalsCount());
 
         Assertions.assertEquals(MapDirection.EAST, animals.getFirst().getOrientation());
         Assertions.assertTrue(animals.getFirst().isAt(firstFinishPosition));
@@ -43,12 +41,13 @@ public class SimulationTest{
     void someCorrectInstructions(){
         List<MoveDirection> directions = OptionsParser.parse(new String[]{"f", "hello", "goodbye", "b", "r", "l", "f", "f", "Hello", "World"});
         List<Vector2d> positions = List.of(firstStartingPosition, secondStartingPosition);
+        RectangularMap rectangularMap = new RectangularMap(5,5);
 
-        Simulation simulation = new Simulation(positions, directions);
+        Simulation simulation = new Simulation(positions, directions, rectangularMap);
         simulation.run();
         List<Animal> animals = simulation.getAnimals();
 
-        Assertions.assertEquals(2, animals.size());
+        Assertions.assertEquals(2, simulation.getAnimalsCount());
 
         Assertions.assertEquals(MapDirection.EAST, animals.getFirst().getOrientation());
         Assertions.assertTrue(animals.getFirst().isAt(firstFinishPosition));
@@ -61,12 +60,13 @@ public class SimulationTest{
     void allWrongInstructions(){
         List<MoveDirection> directions = OptionsParser.parse(new String[]{"It's", "not", "a", "bug", ".", "It's", "a", "feature"});
         List<Vector2d> positions = List.of(firstStartingPosition, secondStartingPosition);
+        RectangularMap rectangularMap = new RectangularMap(5,5);
 
-        Simulation simulation = new Simulation(positions, directions);
+        Simulation simulation = new Simulation(positions, directions, rectangularMap);
         simulation.run();
         List<Animal> animals = simulation.getAnimals();
 
-        Assertions.assertEquals(2, animals.size());
+        Assertions.assertEquals(2, simulation.getAnimalsCount());
 
         Assertions.assertEquals(MapDirection.NORTH, animals.getFirst().getOrientation());
         Assertions.assertTrue(animals.getFirst().isAt(firstStartingPosition));
@@ -79,12 +79,13 @@ public class SimulationTest{
     void emptyInstructions(){
         List<MoveDirection> directions = OptionsParser.parse(new String[]{});
         List<Vector2d> positions = List.of(firstStartingPosition, secondStartingPosition);
+        RectangularMap rectangularMap = new RectangularMap(5,5);
 
-        Simulation simulation = new Simulation(positions, directions);
+        Simulation simulation = new Simulation(positions, directions, rectangularMap);
         simulation.run();
         List<Animal> animals = simulation.getAnimals();
 
-        Assertions.assertEquals(2, animals.size());
+        Assertions.assertEquals(2, simulation.getAnimalsCount());
 
         Assertions.assertEquals(MapDirection.NORTH, animals.getFirst().getOrientation());
         Assertions.assertTrue(animals.getFirst().isAt(firstStartingPosition));
@@ -97,15 +98,40 @@ public class SimulationTest{
     void tryingToLeaveTheBounds(){
         List<MoveDirection> directions = OptionsParser.parse(new String[]{"f", "f", "f", "f", "f", "f"});
         List<Vector2d> positions = List.of(firstStartingPosition);
+        RectangularMap rectangularMap = new RectangularMap(5,5);
 
-        Simulation simulation = new Simulation(positions, directions);
+        Simulation simulation = new Simulation(positions, directions, rectangularMap);
         simulation.run();
         List<Animal> animals = simulation.getAnimals();
 
-        Assertions.assertEquals(1, animals.size());
+        Assertions.assertEquals(1, simulation.getAnimalsCount());
 
         Assertions.assertEquals(MapDirection.NORTH, animals.getFirst().getOrientation());
         Assertions.assertTrue(animals.getFirst().isAt(firstFinishOutOfBoundariesPosition));
+    }
+
+    @Test
+    void tryingToPlaceAnimalOnTopOfOther(){
+        List<MoveDirection> directions = OptionsParser.parse(new String[]{"f", "b", "r", "l"});
+        List<Vector2d> positions = List.of(firstStartingPosition, firstStartingPosition);
+        RectangularMap rectangularMap = new RectangularMap(4,4);
+
+        Simulation simulation = new Simulation(positions, directions, rectangularMap);
+        simulation.run();
+
+        Assertions.assertEquals(1, simulation.getAnimalsCount());
+    }
+
+    @Test
+    void tryingToPlaceAnimalOutOfBounds(){
+        List<MoveDirection> directions = OptionsParser.parse(new String[]{"f", "b", "r", "l"});
+        List<Vector2d> positions = List.of(new Vector2d(2,2));
+        RectangularMap rectangularMap = new RectangularMap(1,1);
+
+        Simulation simulation = new Simulation(positions, directions, rectangularMap);
+        simulation.run();
+
+        Assertions.assertEquals(0, simulation.getAnimalsCount());
     }
 
 }

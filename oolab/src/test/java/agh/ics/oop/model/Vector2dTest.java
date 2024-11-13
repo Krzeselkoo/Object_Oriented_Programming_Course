@@ -13,8 +13,10 @@ public class Vector2dTest {
         Vector2d vec2 = new Vector2d(1, 2);
 
         boolean vectorsAreEqual = vec1.equals(vec2);
+        boolean vectorsAreEqualBackwards = vec2.equals(vec1);
 
         Assertions.assertTrue(vectorsAreEqual);
+        Assertions.assertTrue(vectorsAreEqualBackwards);
     }
 
     @Test
