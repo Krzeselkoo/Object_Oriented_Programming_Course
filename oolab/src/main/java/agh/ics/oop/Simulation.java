@@ -40,7 +40,7 @@ public class Simulation {
                 Animal animal = animals.get(i);
                 worldMap.move(animal, move);
 
-                i = i + 1 == animalsCount ? 0 : i+1;
+                i = (i + 1) % animalsCount;
 
                 System.out.println(worldMap);
             }

@@ -107,17 +107,17 @@ public class AnimalTest {
 
     @Test
     void animalTriesGoingOutOfBounds(){
-        Animal animalBottom = new Animal(RectangularMap.LOW_LEFT_CORNER);
         RectangularMap rectangularMap = new RectangularMap(4,4);
+        Animal animalBottom = new Animal(rectangularMap.getLowLeftCorner());
         Animal animalTop = new Animal(rectangularMap.getTopRightCorner());
         //Bottom animal
 
         animalBottom.move(MoveDirection.BACKWARD, rectangularMap);
-        Assertions.assertTrue(animalBottom.isAt(RectangularMap.LOW_LEFT_CORNER));
+        Assertions.assertTrue(animalBottom.isAt(rectangularMap.getLowLeftCorner()));
 
         animalBottom.move(MoveDirection.LEFT, rectangularMap);
         animalBottom.move(MoveDirection.FORWARD, rectangularMap);
-        Assertions.assertTrue(animalBottom.isAt(RectangularMap.LOW_LEFT_CORNER));
+        Assertions.assertTrue(animalBottom.isAt(rectangularMap.getLowLeftCorner()));
 
         //Top animal
 

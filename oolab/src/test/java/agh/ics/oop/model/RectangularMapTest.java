@@ -7,7 +7,7 @@ public class RectangularMapTest {
 
     @Test
     void correctMapInitialization(){
-        RectangularMap rectangularMap = new RectangularMap(4,4);
+        RectangularMap rectangularMap = new RectangularMap(5,5);
         Vector2d position = new Vector2d(3,3);
         Animal animal = new Animal(position);
         String expectedMapString =
@@ -32,7 +32,7 @@ public class RectangularMapTest {
 
     @Test
     void movingAroundTheMap(){
-        RectangularMap rectangularMap = new RectangularMap(4,4);
+        RectangularMap rectangularMap = new RectangularMap(5,5);
         Vector2d position = new Vector2d(3,3);
         Vector2d breakPosition = new Vector2d(3,4);
         Vector2d endPosition = new Vector2d(4,4);
@@ -56,7 +56,7 @@ public class RectangularMapTest {
 
     @Test
     void tryingToMoveOntoOccupiedField(){
-        RectangularMap rectangularMap = new RectangularMap(4,4);
+        RectangularMap rectangularMap = new RectangularMap(5,5);
         Vector2d firstPosition = new Vector2d(3,3);
         Vector2d secondPosition = new Vector2d(3,4);
         Animal firstAnimal = new Animal(firstPosition);

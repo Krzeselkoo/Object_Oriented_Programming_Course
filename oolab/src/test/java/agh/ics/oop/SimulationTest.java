@@ -22,7 +22,7 @@ public class SimulationTest{
     void allCorrectInstructions(){
         List<MoveDirection> directions = OptionsParser.parse(new String[]{"f", "b", "r", "l", "f", "f"});
         List<Vector2d> positions = List.of(firstStartingPosition, secondStartingPosition);
-        RectangularMap rectangularMap = new RectangularMap(4,4);
+        RectangularMap rectangularMap = new RectangularMap(5,5);
 
         Simulation simulation = new Simulation(positions, directions, rectangularMap);
         simulation.run();
@@ -41,7 +41,7 @@ public class SimulationTest{
     void someCorrectInstructions(){
         List<MoveDirection> directions = OptionsParser.parse(new String[]{"f", "hello", "goodbye", "b", "r", "l", "f", "f", "Hello", "World"});
         List<Vector2d> positions = List.of(firstStartingPosition, secondStartingPosition);
-        RectangularMap rectangularMap = new RectangularMap(4,4);
+        RectangularMap rectangularMap = new RectangularMap(5,5);
 
         Simulation simulation = new Simulation(positions, directions, rectangularMap);
         simulation.run();
@@ -60,7 +60,7 @@ public class SimulationTest{
     void allWrongInstructions(){
         List<MoveDirection> directions = OptionsParser.parse(new String[]{"It's", "not", "a", "bug", ".", "It's", "a", "feature"});
         List<Vector2d> positions = List.of(firstStartingPosition, secondStartingPosition);
-        RectangularMap rectangularMap = new RectangularMap(4,4);
+        RectangularMap rectangularMap = new RectangularMap(5,5);
 
         Simulation simulation = new Simulation(positions, directions, rectangularMap);
         simulation.run();
@@ -79,7 +79,7 @@ public class SimulationTest{
     void emptyInstructions(){
         List<MoveDirection> directions = OptionsParser.parse(new String[]{});
         List<Vector2d> positions = List.of(firstStartingPosition, secondStartingPosition);
-        RectangularMap rectangularMap = new RectangularMap(4,4);
+        RectangularMap rectangularMap = new RectangularMap(5,5);
 
         Simulation simulation = new Simulation(positions, directions, rectangularMap);
         simulation.run();
@@ -98,7 +98,7 @@ public class SimulationTest{
     void tryingToLeaveTheBounds(){
         List<MoveDirection> directions = OptionsParser.parse(new String[]{"f", "f", "f", "f", "f", "f"});
         List<Vector2d> positions = List.of(firstStartingPosition);
-        RectangularMap rectangularMap = new RectangularMap(4,4);
+        RectangularMap rectangularMap = new RectangularMap(5,5);
 
         Simulation simulation = new Simulation(positions, directions, rectangularMap);
         simulation.run();
