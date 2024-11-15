@@ -32,8 +32,8 @@ public class World {
 //        simulation.run();
 
 
-            GrassField grassField = new GrassField(10);
-            grassField.place(new Animal(new Vector2d(5,5)));
+            GrassField grassField = new GrassField(2);
+            grassField.place(new Animal(new Vector2d(2,2)));
         System.out.println(grassField);
 
     }
