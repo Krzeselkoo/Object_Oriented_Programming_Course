@@ -41,16 +41,12 @@ public class GrassField extends AbstractWorldMap{
     @Override
     public WorldElement objectAt(Vector2d position) {
 
-        if(!canMoveTo(position)){
+        if(isOccupied(position)){
             return super.objectAt(position);
         }
         else{
             return grassTiles.get(position);
         }
-    }
-    @Override
-    public boolean canMoveTo(Vector2d position) {
-        return !animals.containsKey(position);
     }
 
     @Override
@@ -78,7 +74,12 @@ public class GrassField extends AbstractWorldMap{
 
         return List.of(calculatedCorners);
     }
-
+    @Override
+    public List<WorldElement> getElements(){
+        List<WorldElement> elements = super.getElements();
+        elements.addAll(animals.values());
+        return elements;
+    }
     public int getNumberOfGrassTiles(){
         return grassTiles.size();
     }
