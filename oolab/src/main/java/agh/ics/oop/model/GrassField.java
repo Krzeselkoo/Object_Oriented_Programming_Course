@@ -14,21 +14,11 @@ public class GrassField extends AbstractWorldMap{
     }
 
     private void initializeGrassMap(){
-        Random rand = new Random();
-        int grassFieldWidth = (int) Math.floor(Math.sqrt(numberOfGrassTiles*10)) + 1;
+        int grassFieldDimension = (int) Math.floor(Math.sqrt(numberOfGrassTiles*10)) + 1;
+        RandomPositionGenerator randomPositionGenerator = new RandomPositionGenerator(grassFieldDimension, grassFieldDimension, numberOfGrassTiles);
 
-        List<Vector2d> grassTilesPossibleTiles = new ArrayList<>(grassFieldWidth);
-
-        for(int i = 0; i < grassFieldWidth; i++){
-            for(int j = 0; j < grassFieldWidth; j++){
-                grassTilesPossibleTiles.add(new Vector2d(i, j));
-            }
-        }
-
-        for(int i = 0; i < numberOfGrassTiles; i++){
-            int index = rand.nextInt(grassFieldWidth * grassFieldWidth);
-            Vector2d grassPosition = grassTilesPossibleTiles.remove(index);
-            grassTiles.put(grassPosition,new Grass(grassPosition));
+        for(Vector2d position: randomPositionGenerator){
+            grassTiles.put(position, new Grass(position));
         }
 
     }
@@ -41,7 +31,7 @@ public class GrassField extends AbstractWorldMap{
     @Override
     public WorldElement objectAt(Vector2d position) {
 
-        if(isOccupied(position)){
+        if(!canMoveTo(position)){
             return super.objectAt(position);
         }
         else{
@@ -77,7 +67,7 @@ public class GrassField extends AbstractWorldMap{
     @Override
     public List<WorldElement> getElements(){
         List<WorldElement> elements = super.getElements();
-        elements.addAll(animals.values());
+        elements.addAll(grassTiles.values());
         return elements;
     }
     public int getNumberOfGrassTiles(){
