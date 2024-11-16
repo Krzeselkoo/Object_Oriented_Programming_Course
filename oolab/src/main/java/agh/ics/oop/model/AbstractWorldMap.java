@@ -10,8 +10,8 @@ import java.util.Map;
 
 public abstract class AbstractWorldMap implements WorldMap{
 
-    protected Map<Vector2d, Animal> animals;
-    protected MapVisualizer mapVisualizer;
+    protected final Map<Vector2d, Animal> animals;
+    protected final MapVisualizer mapVisualizer;
 
     protected AbstractWorldMap() {
         this.mapVisualizer = new MapVisualizer(this);
