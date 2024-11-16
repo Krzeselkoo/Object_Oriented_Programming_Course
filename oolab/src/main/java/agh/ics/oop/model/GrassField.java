@@ -41,7 +41,7 @@ public class GrassField extends AbstractWorldMap{
     @Override
     public WorldElement objectAt(Vector2d position) {
 
-        if(isOccupied(position)){
+        if(!canMoveTo(position)){
             return super.objectAt(position);
         }
         else{
