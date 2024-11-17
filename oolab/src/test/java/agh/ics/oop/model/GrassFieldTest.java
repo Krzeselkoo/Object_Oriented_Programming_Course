@@ -36,7 +36,7 @@ public class GrassFieldTest {
         grassField.move(animal, MoveDirection.RIGHT);
         grassField.move(animal, MoveDirection.FORWARD);
 
-        Assertions.assertFalse(grassField.isOccupied(midPosition));
+        Assertions.assertTrue(grassField.canMoveTo(midPosition));
         Assertions.assertTrue(grassField.isOccupied(endPosition));
         Assertions.assertEquals(animal, grassField.objectAt(endPosition));
     }
