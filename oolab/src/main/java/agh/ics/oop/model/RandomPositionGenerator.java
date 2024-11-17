@@ -46,8 +46,13 @@ public class RandomPositionGenerator implements Iterable<Vector2d>{
             @Override
             public Vector2d next() {
                 int index = rand.nextInt(maxWidth*maxHeight-currentGrassCount);
+                Vector2d temp = grassPossiblePositions.getLast();
+                grassPossiblePositions.set(maxWidth*maxHeight-currentGrassCount-1, grassPossiblePositions.get(index));
+                grassPossiblePositions.set(index, temp);
+
                 currentGrassCount++;
-                return grassPossiblePositions.remove(index);
+
+                return grassPossiblePositions.removeLast();
 
             }
         };
