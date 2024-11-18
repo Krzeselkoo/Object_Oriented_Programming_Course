@@ -12,13 +12,12 @@ public class RectangularMap extends AbstractWorldMap{
 
 
     public RectangularMap(int width, int height) {
-        super();
         topRightCorner = new Vector2d(width-1, height-1);
     }
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        return super.canMoveTo(position) && (position.precedes(topRightCorner) && position.follows(lowLeftCorner));
+        return super.canMoveTo(position) && position.precedes(topRightCorner) && position.follows(lowLeftCorner);
     }
 
     public Vector2d getLowLeftCorner(){

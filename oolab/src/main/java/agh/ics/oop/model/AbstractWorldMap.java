@@ -42,7 +42,7 @@ public abstract class AbstractWorldMap implements WorldMap{
 
     @Override
     public boolean isOccupied(Vector2d position) {
-        return !canMoveTo(position);
+        return animals.containsKey(position);
     }
 
     @Override

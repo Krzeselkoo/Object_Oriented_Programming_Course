@@ -6,7 +6,6 @@ import java.util.*;
 public class GrassField extends AbstractWorldMap{
     private final int numberOfGrassTiles;
     private final Map<Vector2d, Grass> grassTiles = new HashMap<>();
-    private final MapVisualizer mapVisualizer = new MapVisualizer(this);
 
     public GrassField(int numberOfGrassTiles) {
         this.numberOfGrassTiles = numberOfGrassTiles;
@@ -17,7 +16,7 @@ public class GrassField extends AbstractWorldMap{
         Random rand = new Random();
         int grassFieldWidth = (int) Math.floor(Math.sqrt(numberOfGrassTiles*10)) + 1;
 
-        List<Vector2d> grassTilesPossibleTiles = new ArrayList<>(grassFieldWidth);
+        List<Vector2d> grassTilesPossibleTiles = new ArrayList<>(grassFieldWidth*grassFieldWidth);
 
         for(int i = 0; i < grassFieldWidth; i++){
             for(int j = 0; j < grassFieldWidth; j++){
@@ -26,7 +25,7 @@ public class GrassField extends AbstractWorldMap{
         }
 
         for(int i = 0; i < numberOfGrassTiles; i++){
-            int index = rand.nextInt(grassFieldWidth * grassFieldWidth);
+            int index = rand.nextInt(grassTilesPossibleTiles.size() - i);
             Vector2d grassPosition = grassTilesPossibleTiles.remove(index);
             grassTiles.put(grassPosition,new Grass(grassPosition));
         }
@@ -51,10 +50,10 @@ public class GrassField extends AbstractWorldMap{
 
     @Override
     public String toString(){
-        List<Vector2d> calculatedVectors = calculateCornersForDraw();
-        return mapVisualizer.draw(calculatedVectors.getFirst(),calculatedVectors.getLast());
+        Vector2d[] calculatedVectors = calculateCornersForDraw();
+        return mapVisualizer.draw(calculatedVectors[0],calculatedVectors[1]);
     }
-    private List<Vector2d> calculateCornersForDraw(){
+    private Vector2d[] calculateCornersForDraw(){
 
         Vector2d[] calculatedCorners = {null, null};
 
@@ -72,7 +71,7 @@ public class GrassField extends AbstractWorldMap{
             }
         }
 
-        return List.of(calculatedCorners);
+        return calculatedCorners;
     }
     @Override
     public List<WorldElement> getElements(){
