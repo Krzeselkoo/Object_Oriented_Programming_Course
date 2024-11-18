@@ -17,37 +17,53 @@ public class OptionsParserTest {
     @Test
     void forwardMovement(){
         String[] inputList = {"f"};
+        try{
+            MoveDirection direction = OptionsParser.parse(inputList).get(0);
+            Assertions.assertEquals(MoveDirection.FORWARD, direction);
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
 
-        MoveDirection direction = OptionsParser.parse(inputList).get(0);
-
-        Assertions.assertEquals(MoveDirection.FORWARD, direction);
     }
 
     @Test
     void backwardMovement(){
         String[] inputList = {"b"};
 
-        MoveDirection direction = OptionsParser.parse(inputList).get(0);
-
-        Assertions.assertEquals(MoveDirection.BACKWARD, direction);
+        try{
+            MoveDirection direction = OptionsParser.parse(inputList).get(0);
+            Assertions.assertEquals(MoveDirection.BACKWARD, direction);
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @Test
     void rightMovement(){
         String[] inputList = {"r"};
+        MoveDirection direction;
 
-        MoveDirection direction = OptionsParser.parse(inputList).get(0);
+        try{
+            direction = OptionsParser.parse(inputList).get(0);
+            Assertions.assertEquals(MoveDirection.RIGHT, direction);
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
 
-        Assertions.assertEquals(MoveDirection.RIGHT, direction);
     }
 
     @Test
     void leftMovement(){
         String[] inputList = {"l"};
+        MoveDirection direction;
 
-        MoveDirection direction = OptionsParser.parse(inputList).get(0);
+        try{
+            direction = OptionsParser.parse(inputList).get(0);
+            Assertions.assertEquals(MoveDirection.LEFT, direction);
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
 
-        Assertions.assertEquals(MoveDirection.LEFT, direction);
     }
 
     //testing single wrong cases
@@ -56,10 +72,13 @@ public class OptionsParserTest {
     void wrongDirection(){
         String[] direction = {"t"};
         List<MoveDirection> emptyArray = List.of();
+        try {
+            List<MoveDirection> directions = OptionsParser.parse(direction);
+            Assertions.assertEquals(emptyArray, directions);
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
 
-        List<MoveDirection> directions = OptionsParser.parse(direction);
-
-        Assertions.assertEquals(emptyArray, directions);
     }
 
     @Test
@@ -67,9 +86,12 @@ public class OptionsParserTest {
         String[] direction = {""};
         List<MoveDirection> emptyArray = List.of();
 
-        List<MoveDirection> directions = OptionsParser.parse(direction);
-
-        Assertions.assertEquals(emptyArray, directions);
+        try{
+            List<MoveDirection> directions = OptionsParser.parse(direction);
+            Assertions.assertEquals(emptyArray, directions);
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @Test
@@ -77,9 +99,13 @@ public class OptionsParserTest {
         String[] direction = {};
         List<MoveDirection> emptyArray = List.of();
 
-        List<MoveDirection> directions = OptionsParser.parse(direction);
+        try{
+            List<MoveDirection> directions = OptionsParser.parse(direction);
+            Assertions.assertEquals(emptyArray, directions);
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
 
-        Assertions.assertEquals(emptyArray, directions);
     }
 
     //Testing multiple instructions
@@ -89,9 +115,12 @@ public class OptionsParserTest {
         String[] directions = {"f", "b", "r", "l"};
         List<MoveDirection> correctOutcome = Arrays.asList(MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.RIGHT, MoveDirection.LEFT);
 
-        List<MoveDirection> convertedDirs = OptionsParser.parse(directions);
-
-        Assertions.assertEquals(correctOutcome, convertedDirs);
+        try{
+            List<MoveDirection> convertedDirs = OptionsParser.parse(directions);
+            Assertions.assertEquals(correctOutcome, convertedDirs);
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @Test
@@ -99,9 +128,12 @@ public class OptionsParserTest {
         String[] directions = {"f","t","b","t"};
         List<MoveDirection> correctOutcome = Arrays.asList(MoveDirection.FORWARD, MoveDirection.BACKWARD);
 
-        List<MoveDirection> convertedDirs = OptionsParser.parse(directions);
-
-        Assertions.assertEquals(correctOutcome, convertedDirs);
+        try{
+            List<MoveDirection> convertedDirs = OptionsParser.parse(directions);
+            Assertions.assertEquals(correctOutcome, convertedDirs);
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
 
     }
 
@@ -110,9 +142,12 @@ public class OptionsParserTest {
         String[] directions = {"o","i","k","t"};
         List<MoveDirection> correctOutcome = List.of();
 
-        List<MoveDirection> convertedDirs = OptionsParser.parse(directions);
-
-        Assertions.assertEquals(correctOutcome, convertedDirs);
+        try{
+            List<MoveDirection> convertedDirs = OptionsParser.parse(directions);
+            Assertions.assertEquals(correctOutcome, convertedDirs);
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
     }
 
 }

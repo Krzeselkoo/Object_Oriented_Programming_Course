@@ -50,8 +50,8 @@ public class GrassField extends AbstractWorldMap{
 
     @Override
     public String toString(){
-        Vector2d[] calculatedVectors = calculateCornersForDraw();
-        return mapVisualizer.draw(calculatedVectors[0],calculatedVectors[1]);
+
+        return mapVisualizer.draw();
     }
     private Vector2d[] calculateCornersForDraw(){
 
@@ -81,6 +81,12 @@ public class GrassField extends AbstractWorldMap{
     }
     public int getNumberOfGrassTiles(){
         return grassTiles.size();
+    }
+
+    @Override
+    public Boundary getCurrentBoundary(){
+        Vector2d[] calculatedVectors = calculateCornersForDraw();
+        return new Boundary(calculatedVectors[0],calculatedVectors[1]);
     }
 }
 

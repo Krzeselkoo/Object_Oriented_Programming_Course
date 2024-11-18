@@ -24,8 +24,12 @@ public class Simulation {
 
         for(Vector2d position: positions){
             Animal animal = new Animal(position);
-            if(worldMap.place(animal)){
+            try{
+                worldMap.place(animal);
                 animals.add(animal);
+            }
+            catch(IncorrectPositionException e){
+                System.out.println(e);
             }
         }
 

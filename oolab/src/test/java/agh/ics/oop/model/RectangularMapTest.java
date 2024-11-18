@@ -19,8 +19,11 @@ public class RectangularMapTest {
 //                "  1: | | | | | |\r\n" +
 //                "  0: | | | | | |\r\n" +
 //                " -1: -----------\r\n";
-
-        rectangularMap.place(animal);
+        try {
+            rectangularMap.place(animal);
+        }catch(IncorrectPositionException e){
+            System.out.println(e);
+        }
 
         Assertions.assertEquals(new Vector2d(4,4),rectangularMap.getTopRightCorner());
         Assertions.assertTrue(rectangularMap.isOccupied(position));
@@ -38,7 +41,11 @@ public class RectangularMapTest {
         Vector2d endPosition = new Vector2d(4,4);
         Animal animal = new Animal(position);
 
-        rectangularMap.place(animal);
+        try {
+            rectangularMap.place(animal);
+        }catch(IncorrectPositionException e){
+            System.out.println(e);
+        }
         rectangularMap.move(animal, MoveDirection.FORWARD);
         //Trying to leave out of bounds
         rectangularMap.move(animal, MoveDirection.FORWARD);
@@ -62,8 +69,18 @@ public class RectangularMapTest {
         Animal firstAnimal = new Animal(firstPosition);
         Animal secondAnimal = new Animal(secondPosition);
 
-        rectangularMap.place(firstAnimal);
-        rectangularMap.place(secondAnimal);
+        try {
+            rectangularMap.place(firstAnimal);
+        }catch(IncorrectPositionException e){
+            System.out.println(e);
+        }
+
+        try {
+            rectangularMap.place(secondAnimal);
+        }catch(IncorrectPositionException e){
+            System.out.println(e);
+        }
+
         rectangularMap.move(firstAnimal, MoveDirection.FORWARD);
 
         Assertions.assertFalse(rectangularMap.canMoveTo(secondPosition));

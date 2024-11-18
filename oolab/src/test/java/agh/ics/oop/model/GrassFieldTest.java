@@ -10,8 +10,11 @@ public class GrassFieldTest {
         Vector2d position = new Vector2d(3,3);
         Animal animal = new Animal(position);
 
-        grassField.place(animal);
-
+        try {
+            grassField.place(animal);
+        }catch (IncorrectPositionException e){
+            System.out.println(e);
+        }
         Assertions.assertEquals(5, grassField.getNumberOfGrassTiles());
         Assertions.assertTrue(grassField.isOccupied(position));
         Assertions.assertEquals(animal, grassField.objectAt(position));
@@ -26,7 +29,11 @@ public class GrassFieldTest {
         Vector2d endPosition = new Vector2d(4,4);
         Animal animal = new Animal(position);
 
-        grassField.place(animal);
+        try {
+            grassField.place(animal);
+        }catch (IncorrectPositionException e){
+            System.out.println(e);
+        }
         grassField.move(animal, MoveDirection.FORWARD);
 
         Assertions.assertEquals(3, grassField.getNumberOfGrassTiles());
@@ -49,8 +56,18 @@ public class GrassFieldTest {
         Animal firstAnimal = new Animal(firstPosition);
         Animal secondAnimal = new Animal(secondPosition);
 
-        grassField.place(firstAnimal);
-        grassField.place(secondAnimal);
+        try {
+            grassField.place(firstAnimal);
+        }catch (IncorrectPositionException e){
+            System.out.println(e);
+        }
+
+        try {
+            grassField.place(secondAnimal);
+        }catch (IncorrectPositionException e){
+            System.out.println(e);
+        }
+
 //        System.out.println(grassField);
 //        System.out.println(grassField.getGrass());
 //        System.out.println(grassField.getAnimals());
