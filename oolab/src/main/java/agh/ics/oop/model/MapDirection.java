@@ -15,16 +15,16 @@ public enum MapDirection {
         this.stringDir = stringDir;
         this.arrow = arrow;
     }
-    public static MapDirection next(MapDirection direction) {
-        return values()[(direction.ordinal() + 1)%4];
+    public MapDirection next() {
+        return values()[(this.ordinal() + 1)%4];
     }
 
-    public static MapDirection previous(MapDirection direction) {
-        return values()[(direction.ordinal() + 3)%4];
+    public MapDirection previous() {
+        return values()[(this.ordinal() + 3)%4];
     }
 
-    public static Vector2d toUnitVector(MapDirection direction) {
-        return direction.vector;
+    public Vector2d toUnitVector() {
+        return this.vector;
     }
 
     public String toString() {

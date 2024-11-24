@@ -39,59 +39,45 @@ public class SimulationTest{
 
     @Test
     void someCorrectInstructions(){
-        List<MoveDirection> directions = OptionsParser.parse(new String[]{"f", "hello", "goodbye", "b", "r", "l", "f", "f", "Hello", "World"});
-        List<Vector2d> positions = List.of(firstStartingPosition, secondStartingPosition);
-        RectangularMap rectangularMap = new RectangularMap(5,5);
-
-        Simulation simulation = new Simulation(positions, directions, rectangularMap);
-        simulation.run();
-        List<Animal> animals = simulation.getAnimals();
-
-        Assertions.assertEquals(2, simulation.getAnimalsCount());
-
-        Assertions.assertEquals(MapDirection.EAST, animals.getFirst().getOrientation());
-        Assertions.assertTrue(animals.getFirst().isAt(firstFinishPosition));
-
-        Assertions.assertEquals(MapDirection.WEST, animals.get(1).getOrientation());
-        Assertions.assertTrue(animals.get(1).isAt(secondFinishPosition));
+        Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> OptionsParser.parse(new String[]{"f", "hello", "goodbye", "b", "r", "l", "f", "f", "Hello", "World"}));
+//        List<Vector2d> positions = List.of(firstStartingPosition, secondStartingPosition);
+//        RectangularMap rectangularMap = new RectangularMap(5,5);
+//
+//        Simulation simulation = new Simulation(positions, directions, rectangularMap);
+//        simulation.run();
+//        List<Animal> animals = simulation.getAnimals();
+//
+//        Assertions.assertEquals(2, simulation.getAnimalsCount());
+//
+//        Assertions.assertEquals(MapDirection.EAST, animals.getFirst().getOrientation());
+//        Assertions.assertTrue(animals.getFirst().isAt(firstFinishPosition));
+//
+//        Assertions.assertEquals(MapDirection.WEST, animals.get(1).getOrientation());
+//        Assertions.assertTrue(animals.get(1).isAt(secondFinishPosition));
     }
 
     @Test
     void allWrongInstructions(){
-        List<MoveDirection> directions = OptionsParser.parse(new String[]{"It's", "not", "a", "bug", ".", "It's", "a", "feature"});
-        List<Vector2d> positions = List.of(firstStartingPosition, secondStartingPosition);
-        RectangularMap rectangularMap = new RectangularMap(5,5);
-
-        Simulation simulation = new Simulation(positions, directions, rectangularMap);
-        simulation.run();
-        List<Animal> animals = simulation.getAnimals();
-
-        Assertions.assertEquals(2, simulation.getAnimalsCount());
-
-        Assertions.assertEquals(MapDirection.NORTH, animals.getFirst().getOrientation());
-        Assertions.assertTrue(animals.getFirst().isAt(firstStartingPosition));
-
-        Assertions.assertEquals(MapDirection.NORTH, animals.get(1).getOrientation());
-        Assertions.assertTrue(animals.get(1).isAt(secondStartingPosition));
+        Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> OptionsParser.parse(new String[]{"It's", "not", "a", "bug", ".", "It's", "a", "feature"}));
+//        List<Vector2d> positions = List.of(firstStartingPosition, secondStartingPosition);
+//        RectangularMap rectangularMap = new RectangularMap(5,5);
+//
+//        Simulation simulation = new Simulation(positions, directions, rectangularMap);
+//        simulation.run();
+//        List<Animal> animals = simulation.getAnimals();
+//
+//        Assertions.assertEquals(2, simulation.getAnimalsCount());
+//
+//        Assertions.assertEquals(MapDirection.NORTH, animals.getFirst().getOrientation());
+//        Assertions.assertTrue(animals.getFirst().isAt(firstStartingPosition));
+//
+//        Assertions.assertEquals(MapDirection.NORTH, animals.get(1).getOrientation());
+//        Assertions.assertTrue(animals.get(1).isAt(secondStartingPosition));
     }
 
     @Test
     void emptyInstructions(){
-        List<MoveDirection> directions = OptionsParser.parse(new String[]{});
-        List<Vector2d> positions = List.of(firstStartingPosition, secondStartingPosition);
-        RectangularMap rectangularMap = new RectangularMap(5,5);
-
-        Simulation simulation = new Simulation(positions, directions, rectangularMap);
-        simulation.run();
-        List<Animal> animals = simulation.getAnimals();
-
-        Assertions.assertEquals(2, simulation.getAnimalsCount());
-
-        Assertions.assertEquals(MapDirection.NORTH, animals.getFirst().getOrientation());
-        Assertions.assertTrue(animals.getFirst().isAt(firstStartingPosition));
-
-        Assertions.assertEquals(MapDirection.NORTH, animals.get(1).getOrientation());
-        Assertions.assertTrue(animals.get(1).isAt(secondStartingPosition));
+        Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> OptionsParser.parse(new String[]{}));
     }
 
     @Test

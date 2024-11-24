@@ -28,6 +28,7 @@ public class GrassField extends AbstractWorldMap{
             int index = rand.nextInt(grassTilesPossibleTiles.size() - i);
             Vector2d grassPosition = grassTilesPossibleTiles.remove(index);
             grassTiles.put(grassPosition,new Grass(grassPosition));
+            mapChanged("Grass got placed at postion" + grassPosition);
         }
 
     }
@@ -48,11 +49,6 @@ public class GrassField extends AbstractWorldMap{
         }
     }
 
-    @Override
-    public String toString(){
-
-        return mapVisualizer.draw();
-    }
     private Vector2d[] calculateCornersForDraw(){
 
         Vector2d[] calculatedCorners = {null, null};

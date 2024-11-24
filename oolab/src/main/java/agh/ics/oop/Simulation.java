@@ -29,7 +29,7 @@ public class Simulation {
                 animals.add(animal);
             }
             catch(IncorrectPositionException e){
-                System.out.println(e);
+                System.out.println(e.getMessage());
             }
         }
 
@@ -45,8 +45,6 @@ public class Simulation {
                 worldMap.move(animal, move);
 
                 i = (i + 1) % animalsCount;
-
-                System.out.println(worldMap);
             }
         }
 
