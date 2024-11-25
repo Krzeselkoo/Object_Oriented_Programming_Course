@@ -33,7 +33,10 @@ public class SimulationEngine {
 //        }
 
 //        executorService.shutdown();
-        executorService.awaitTermination(2, TimeUnit.SECONDS);
+
+        if(!executorService.awaitTermination(2, TimeUnit.SECONDS)){
+            executorService.shutdownNow();
+        }
     }
 
     public void runAsyncInThreadPool(){
