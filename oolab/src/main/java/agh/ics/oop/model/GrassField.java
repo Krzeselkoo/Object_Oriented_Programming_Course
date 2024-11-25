@@ -1,5 +1,4 @@
 package agh.ics.oop.model;
-import agh.ics.oop.model.util.MapVisualizer;
 
 import java.util.*;
 
@@ -28,6 +27,7 @@ public class GrassField extends AbstractWorldMap{
             int index = rand.nextInt(grassTilesPossibleTiles.size() - i);
             Vector2d grassPosition = grassTilesPossibleTiles.remove(index);
             grassTiles.put(grassPosition,new Grass(grassPosition));
+            mapChanged("Grass got placed at postion" + grassPosition);
         }
 
     }
@@ -48,12 +48,7 @@ public class GrassField extends AbstractWorldMap{
         }
     }
 
-    @Override
-    public String toString(){
-        Vector2d[] calculatedVectors = calculateCornersForDraw();
-        return mapVisualizer.draw(calculatedVectors[0],calculatedVectors[1]);
-    }
-    private Vector2d[] calculateCornersForDraw(){
+    private Boundary calculateBoundary(){
 
         Vector2d[] calculatedCorners = {null, null};
 
@@ -71,7 +66,7 @@ public class GrassField extends AbstractWorldMap{
             }
         }
 
-        return calculatedCorners;
+        return new Boundary(calculatedCorners[0], calculatedCorners[1]);
     }
     @Override
     public List<WorldElement> getElements(){
@@ -81,6 +76,11 @@ public class GrassField extends AbstractWorldMap{
     }
     public int getNumberOfGrassTiles(){
         return grassTiles.size();
+    }
+
+    @Override
+    public Boundary getCurrentBoundary(){
+        return calculateBoundary();
     }
 }
 

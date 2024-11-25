@@ -10,7 +10,8 @@ public class GrassFieldTest {
         Vector2d position = new Vector2d(3,3);
         Animal animal = new Animal(position);
 
-        grassField.place(animal);
+
+        Assertions.assertDoesNotThrow(() -> grassField.place(animal));
 
         Assertions.assertEquals(5, grassField.getNumberOfGrassTiles());
         Assertions.assertTrue(grassField.isOccupied(position));
@@ -26,7 +27,9 @@ public class GrassFieldTest {
         Vector2d endPosition = new Vector2d(4,4);
         Animal animal = new Animal(position);
 
-        grassField.place(animal);
+
+        Assertions.assertDoesNotThrow(() -> grassField.place(animal));
+
         grassField.move(animal, MoveDirection.FORWARD);
 
         Assertions.assertEquals(3, grassField.getNumberOfGrassTiles());
@@ -49,8 +52,9 @@ public class GrassFieldTest {
         Animal firstAnimal = new Animal(firstPosition);
         Animal secondAnimal = new Animal(secondPosition);
 
-        grassField.place(firstAnimal);
-        grassField.place(secondAnimal);
+        Assertions.assertDoesNotThrow(() -> grassField.place(firstAnimal));
+        Assertions.assertDoesNotThrow(() -> grassField.place(secondAnimal));
+
 //        System.out.println(grassField);
 //        System.out.println(grassField.getGrass());
 //        System.out.println(grassField.getAnimals());
@@ -61,5 +65,17 @@ public class GrassFieldTest {
         Assertions.assertTrue(grassField.isOccupied(firstPosition));
         Assertions.assertEquals(firstAnimal, grassField.objectAt(firstPosition));
         Assertions.assertEquals(secondAnimal, grassField.objectAt(secondPosition));
+    }
+
+    @Test
+    void tryingToPlaceAnimalOnOccupiedSpace(){
+        GrassField grassField = new GrassField(3);
+        Vector2d position = new Vector2d(2,2);
+
+        Animal firstAnimal = new Animal(position);
+        Animal secondAnimal = new Animal(position);
+
+        Assertions.assertDoesNotThrow(() -> grassField.place(firstAnimal));
+        Assertions.assertThrowsExactly(IncorrectPositionException.class, () -> grassField.place(secondAnimal));
     }
 }

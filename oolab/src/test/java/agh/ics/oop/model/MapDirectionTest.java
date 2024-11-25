@@ -13,7 +13,7 @@ public class MapDirectionTest {
     void northNext(){
         MapDirection north = MapDirection.NORTH;
 
-        MapDirection northNext = MapDirection.next(north);
+        MapDirection northNext = north.next();
 
         assertEquals(MapDirection.EAST, northNext);
     }
@@ -22,7 +22,7 @@ public class MapDirectionTest {
     void eastNext(){
         MapDirection east = MapDirection.EAST;
 
-        MapDirection eastNext = MapDirection.next(east);
+        MapDirection eastNext = east.next();
 
         assertEquals(MapDirection.SOUTH, eastNext);
     }
@@ -31,7 +31,7 @@ public class MapDirectionTest {
     void southNext(){
         MapDirection south = MapDirection.SOUTH;
 
-        MapDirection southNext = MapDirection.next(south);
+        MapDirection southNext = south.next();
 
         assertEquals(MapDirection.WEST, southNext);
     }
@@ -40,7 +40,7 @@ public class MapDirectionTest {
     void westNext(){
         MapDirection west = MapDirection.WEST;
 
-        MapDirection westNext = MapDirection.next(west);
+        MapDirection westNext = west.next();
 
         assertEquals(MapDirection.NORTH, westNext);
     }
@@ -51,7 +51,7 @@ public class MapDirectionTest {
     void northPrevious(){
         MapDirection north = MapDirection.NORTH;
 
-        MapDirection northPrev = MapDirection.previous(north);
+        MapDirection northPrev = north.previous();
 
         assertEquals(MapDirection.WEST, northPrev);
     }
@@ -60,7 +60,7 @@ public class MapDirectionTest {
     void eastPrevious(){
         MapDirection east = MapDirection.EAST;
 
-        MapDirection eastPrev = MapDirection.previous(east);
+        MapDirection eastPrev = east.previous();
 
         assertEquals(MapDirection.NORTH, eastPrev);
     }
@@ -69,7 +69,7 @@ public class MapDirectionTest {
     void southPrevious(){
         MapDirection south = MapDirection.SOUTH;
 
-        MapDirection southPrev = MapDirection.previous(south);
+        MapDirection southPrev = south.previous();
 
         assertEquals(MapDirection.EAST, southPrev);
     }
@@ -78,7 +78,7 @@ public class MapDirectionTest {
     void westPrevious(){
         MapDirection west = MapDirection.WEST;
 
-        MapDirection westPrev = MapDirection.previous(west);
+        MapDirection westPrev = west.previous();
 
         assertEquals(MapDirection.SOUTH, westPrev);
     }
@@ -88,7 +88,7 @@ public class MapDirectionTest {
         MapDirection north = MapDirection.NORTH;
         Vector2d correctVec = new Vector2d(0, 1);
 
-        Vector2d unitVector = MapDirection.toUnitVector(north);
+        Vector2d unitVector = north.toUnitVector();
 
         assertEquals(correctVec, unitVector);
     }

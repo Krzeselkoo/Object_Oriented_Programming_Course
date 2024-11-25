@@ -1,14 +1,12 @@
 package agh.ics.oop;
 
-import agh.ics.oop.OptionsParser;
 import agh.ics.oop.model.MoveDirection;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.w3c.dom.ls.LSInput;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class OptionsParserTest {
 
@@ -18,36 +16,28 @@ public class OptionsParserTest {
     void forwardMovement(){
         String[] inputList = {"f"};
 
-        MoveDirection direction = OptionsParser.parse(inputList).get(0);
-
-        Assertions.assertEquals(MoveDirection.FORWARD, direction);
+        Assertions.assertDoesNotThrow(() -> Assertions.assertEquals(MoveDirection.FORWARD, OptionsParser.parse(inputList).get(0)));
     }
 
     @Test
     void backwardMovement(){
         String[] inputList = {"b"};
 
-        MoveDirection direction = OptionsParser.parse(inputList).get(0);
-
-        Assertions.assertEquals(MoveDirection.BACKWARD, direction);
+        Assertions.assertDoesNotThrow(() -> Assertions.assertEquals(MoveDirection.BACKWARD, OptionsParser.parse(inputList).get(0)));
     }
 
     @Test
     void rightMovement(){
         String[] inputList = {"r"};
 
-        MoveDirection direction = OptionsParser.parse(inputList).get(0);
-
-        Assertions.assertEquals(MoveDirection.RIGHT, direction);
+        Assertions.assertDoesNotThrow(() -> Assertions.assertEquals(MoveDirection.RIGHT, OptionsParser.parse(inputList).get(0)));
     }
 
     @Test
     void leftMovement(){
         String[] inputList = {"l"};
 
-        MoveDirection direction = OptionsParser.parse(inputList).get(0);
-
-        Assertions.assertEquals(MoveDirection.LEFT, direction);
+        Assertions.assertDoesNotThrow(() -> Assertions.assertEquals(MoveDirection.LEFT, OptionsParser.parse(inputList).get(0)));
     }
 
     //testing single wrong cases
@@ -55,31 +45,22 @@ public class OptionsParserTest {
     @Test
     void wrongDirection(){
         String[] direction = {"t"};
-        List<MoveDirection> emptyArray = List.of();
 
-        List<MoveDirection> directions = OptionsParser.parse(direction);
-
-        Assertions.assertEquals(emptyArray, directions);
+        Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> OptionsParser.parse(direction));
     }
 
     @Test
     void emptyStringPassed(){
         String[] direction = {""};
-        List<MoveDirection> emptyArray = List.of();
 
-        List<MoveDirection> directions = OptionsParser.parse(direction);
-
-        Assertions.assertEquals(emptyArray, directions);
+        Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> OptionsParser.parse(direction));
     }
 
     @Test
     void emptyStringListPassed(){
         String[] direction = {};
-        List<MoveDirection> emptyArray = List.of();
 
-        List<MoveDirection> directions = OptionsParser.parse(direction);
-
-        Assertions.assertEquals(emptyArray, directions);
+        Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> OptionsParser.parse(direction));
     }
 
     //Testing multiple instructions
@@ -89,30 +70,24 @@ public class OptionsParserTest {
         String[] directions = {"f", "b", "r", "l"};
         List<MoveDirection> correctOutcome = Arrays.asList(MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.RIGHT, MoveDirection.LEFT);
 
-        List<MoveDirection> convertedDirs = OptionsParser.parse(directions);
-
-        Assertions.assertEquals(correctOutcome, convertedDirs);
+        Assertions.assertDoesNotThrow(() -> {
+            List<MoveDirection> convertedDirs = OptionsParser.parse(directions);
+            Assertions.assertEquals(correctOutcome, convertedDirs);
+        });
     }
 
     @Test
     void mostGoodDirections(){
         String[] directions = {"f","t","b","t"};
-        List<MoveDirection> correctOutcome = Arrays.asList(MoveDirection.FORWARD, MoveDirection.BACKWARD);
 
-        List<MoveDirection> convertedDirs = OptionsParser.parse(directions);
-
-        Assertions.assertEquals(correctOutcome, convertedDirs);
-
+        Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> OptionsParser.parse(directions));
     }
 
     @Test
     void allWrongDirections(){
         String[] directions = {"o","i","k","t"};
-        List<MoveDirection> correctOutcome = List.of();
 
-        List<MoveDirection> convertedDirs = OptionsParser.parse(directions);
-
-        Assertions.assertEquals(correctOutcome, convertedDirs);
+        Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> OptionsParser.parse(directions));
     }
 
 }

@@ -7,12 +7,16 @@ import java.util.Map;
 
 public class RectangularMap extends AbstractWorldMap{
 
-    private final Vector2d lowLeftCorner = new Vector2d(0,0);
+    private final Boundary boundary;
+
+    private final Vector2d lowLeftCorner;
     private final Vector2d topRightCorner;
 
 
     public RectangularMap(int width, int height) {
+        lowLeftCorner = new Vector2d(0,0);
         topRightCorner = new Vector2d(width-1, height-1);
+        boundary = new Boundary(lowLeftCorner, topRightCorner);
     }
 
     @Override
@@ -20,17 +24,8 @@ public class RectangularMap extends AbstractWorldMap{
         return super.canMoveTo(position) && position.precedes(topRightCorner) && position.follows(lowLeftCorner);
     }
 
-    public Vector2d getLowLeftCorner(){
-        return lowLeftCorner;
-    }
-
-    public Vector2d getTopRightCorner(){
-        return topRightCorner;
-    }
-
     @Override
-    public String toString(){
-        return mapVisualizer.draw(lowLeftCorner, topRightCorner);
+    public Boundary getCurrentBoundary(){
+        return boundary;
     }
-
 }

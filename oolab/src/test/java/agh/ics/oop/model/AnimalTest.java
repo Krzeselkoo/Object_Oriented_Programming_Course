@@ -108,25 +108,25 @@ public class AnimalTest {
     @Test
     void animalTriesGoingOutOfBounds(){
         RectangularMap rectangularMap = new RectangularMap(4,4);
-        Animal animalBottom = new Animal(rectangularMap.getLowLeftCorner());
-        Animal animalTop = new Animal(rectangularMap.getTopRightCorner());
+        Animal animalBottom = new Animal(rectangularMap.getCurrentBoundary().bottomLeft());
+        Animal animalTop = new Animal(rectangularMap.getCurrentBoundary().topRight());
         //Bottom animal
 
         animalBottom.move(MoveDirection.BACKWARD, rectangularMap);
-        Assertions.assertTrue(animalBottom.isAt(rectangularMap.getLowLeftCorner()));
+        Assertions.assertTrue(animalBottom.isAt(rectangularMap.getCurrentBoundary().bottomLeft()));
 
         animalBottom.move(MoveDirection.LEFT, rectangularMap);
         animalBottom.move(MoveDirection.FORWARD, rectangularMap);
-        Assertions.assertTrue(animalBottom.isAt(rectangularMap.getLowLeftCorner()));
+        Assertions.assertTrue(animalBottom.isAt(rectangularMap.getCurrentBoundary().bottomLeft()));
 
         //Top animal
 
         animalTop.move(MoveDirection.FORWARD, rectangularMap);
-        Assertions.assertTrue(animalTop.isAt(rectangularMap.getTopRightCorner()));
+        Assertions.assertTrue(animalTop.isAt(rectangularMap.getCurrentBoundary().topRight()));
 
         animalTop.move(MoveDirection.RIGHT, rectangularMap);
         animalTop.move(MoveDirection.FORWARD, rectangularMap);
-        Assertions.assertTrue(animalTop.isAt(rectangularMap.getTopRightCorner()));
+        Assertions.assertTrue(animalTop.isAt(rectangularMap.getCurrentBoundary().topRight()));
     }
 
     @Test

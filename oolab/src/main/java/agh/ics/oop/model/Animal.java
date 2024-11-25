@@ -30,19 +30,19 @@ public class Animal implements WorldElement{
         if(direction != null) {
             switch (direction) {
                 case FORWARD -> {
-                    Vector2d newPosition = position.add(MapDirection.toUnitVector(orientation));
+                    Vector2d newPosition = position.add(orientation.toUnitVector());
                     if (moveValidator.canMoveTo(newPosition)) {
                         position = newPosition;
                     }
                 }
                 case BACKWARD -> {
-                    Vector2d newPosition = position.subtract(MapDirection.toUnitVector(orientation));
+                    Vector2d newPosition = position.subtract(orientation.toUnitVector());
                     if (moveValidator.canMoveTo(newPosition)) {
                         position = newPosition;
                     }
                 }
-                case LEFT -> orientation = MapDirection.previous(orientation);
-                case RIGHT -> orientation = MapDirection.next(orientation);
+                case LEFT -> orientation = orientation.previous();
+                case RIGHT -> orientation = orientation.next();
             }
         }
     }
