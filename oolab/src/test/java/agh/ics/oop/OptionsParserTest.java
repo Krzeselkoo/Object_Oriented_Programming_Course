@@ -15,53 +15,29 @@ public class OptionsParserTest {
     @Test
     void forwardMovement(){
         String[] inputList = {"f"};
-        try{
-            MoveDirection direction = OptionsParser.parse(inputList).get(0);
-            Assertions.assertEquals(MoveDirection.FORWARD, direction);
-        }catch(IllegalArgumentException e){
-            System.out.println(e.getMessage());
-        }
 
+        Assertions.assertDoesNotThrow(() -> Assertions.assertEquals(MoveDirection.FORWARD, OptionsParser.parse(inputList).get(0)));
     }
 
     @Test
     void backwardMovement(){
         String[] inputList = {"b"};
 
-        try{
-            MoveDirection direction = OptionsParser.parse(inputList).get(0);
-            Assertions.assertEquals(MoveDirection.BACKWARD, direction);
-        }catch(IllegalArgumentException e){
-            System.out.println(e.getMessage());
-        }
+        Assertions.assertDoesNotThrow(() -> Assertions.assertEquals(MoveDirection.BACKWARD, OptionsParser.parse(inputList).get(0)));
     }
 
     @Test
     void rightMovement(){
         String[] inputList = {"r"};
-        MoveDirection direction;
 
-        try{
-            direction = OptionsParser.parse(inputList).get(0);
-            Assertions.assertEquals(MoveDirection.RIGHT, direction);
-        }catch(IllegalArgumentException e){
-            System.out.println(e.getMessage());
-        }
-
+        Assertions.assertDoesNotThrow(() -> Assertions.assertEquals(MoveDirection.RIGHT, OptionsParser.parse(inputList).get(0)));
     }
 
     @Test
     void leftMovement(){
         String[] inputList = {"l"};
-        MoveDirection direction;
 
-        try{
-            direction = OptionsParser.parse(inputList).get(0);
-            Assertions.assertEquals(MoveDirection.LEFT, direction);
-        }catch(IllegalArgumentException e){
-            System.out.println(e.getMessage());
-        }
-
+        Assertions.assertDoesNotThrow(() -> Assertions.assertEquals(MoveDirection.LEFT, OptionsParser.parse(inputList).get(0)));
     }
 
     //testing single wrong cases
@@ -76,7 +52,6 @@ public class OptionsParserTest {
     @Test
     void emptyStringPassed(){
         String[] direction = {""};
-
 
         Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> OptionsParser.parse(direction));
     }
@@ -95,13 +70,10 @@ public class OptionsParserTest {
         String[] directions = {"f", "b", "r", "l"};
         List<MoveDirection> correctOutcome = Arrays.asList(MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.RIGHT, MoveDirection.LEFT);
 
-
         Assertions.assertDoesNotThrow(() -> {
             List<MoveDirection> convertedDirs = OptionsParser.parse(directions);
             Assertions.assertEquals(correctOutcome, convertedDirs);
         });
-
-
     }
 
     @Test

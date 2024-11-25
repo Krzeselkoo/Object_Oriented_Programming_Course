@@ -1,5 +1,4 @@
 package agh.ics.oop.model;
-import agh.ics.oop.model.util.MapVisualizer;
 
 import java.util.*;
 
@@ -49,7 +48,7 @@ public class GrassField extends AbstractWorldMap{
         }
     }
 
-    private Vector2d[] calculateCornersForDraw(){
+    private Boundary calculateBoundary(){
 
         Vector2d[] calculatedCorners = {null, null};
 
@@ -67,7 +66,7 @@ public class GrassField extends AbstractWorldMap{
             }
         }
 
-        return calculatedCorners;
+        return new Boundary(calculatedCorners[0], calculatedCorners[1]);
     }
     @Override
     public List<WorldElement> getElements(){
@@ -81,8 +80,7 @@ public class GrassField extends AbstractWorldMap{
 
     @Override
     public Boundary getCurrentBoundary(){
-        Vector2d[] calculatedVectors = calculateCornersForDraw();
-        return new Boundary(calculatedVectors[0],calculatedVectors[1]);
+        return calculateBoundary();
     }
 }
 
