@@ -1,10 +1,4 @@
 package agh.ics.oop.model;
-
-import agh.ics.oop.model.util.MapVisualizer;
-
-import java.util.HashMap;
-import java.util.Map;
-
 public class RectangularMap extends AbstractWorldMap{
 
     private final Boundary boundary;
