@@ -8,7 +8,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-public class World {
+public class    World {
 
     private static void run(MoveDirection[] directions) {
 
