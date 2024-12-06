@@ -38,7 +38,7 @@ public class    World {
             List<Simulation> simulations = new ArrayList<>();
             ConsoleMapDisplay consoleMapDisplay = new ConsoleMapDisplay();
 
-            for(int i = 0; i < 40000; i++){
+            for(int i = 0; i < 10000; i++){
                 GrassField grassField1 = new GrassField(4);
                 grassField1.subscribe(consoleMapDisplay);
                 simulations.add(new Simulation(positions,directions,grassField1));
