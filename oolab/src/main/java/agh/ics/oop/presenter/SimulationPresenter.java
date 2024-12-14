@@ -93,17 +93,12 @@ public class SimulationPresenter implements MapChangeListener {
     }
 
     private void drawObjects(Boundary boundary){
-
-        for(int x = boundary.bottomLeft().getX(); x <= boundary.topRight().getX(); x++){
-            for(int y = boundary.bottomLeft().getY(); y <= boundary.topRight().getY(); y++){
-                Vector2d position = new Vector2d(x,y);
-                WorldElement object = worldMap.objectAt(position);
-                if(object != null){
-                    Text text = new Text(object.toString());
-                    GridPane.setHalignment(text, HPos.CENTER);
-                    mapGrid.add(text, x - boundary.bottomLeft().getX() + 1, boundary.topRight().getY() - y + 1);
-                }
-            }
+        
+        List<WorldElement> elements = worldMap.getElements();
+        for (WorldElement element : elements){
+            Text text = new Text(element.toString());
+            GridPane.setHalignment(text, HPos.CENTER);
+            mapGrid.add(text, element.getPosition().getX() - boundary.bottomLeft().getX() + 1, boundary.topRight().getY() - element.getPosition().getY() + 1);
         }
 
     }

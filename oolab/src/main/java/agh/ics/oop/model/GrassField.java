@@ -71,7 +71,7 @@ public class GrassField extends AbstractWorldMap{
     @Override
     public List<WorldElement> getElements(){
         List<WorldElement> elements = super.getElements();
-        elements.addAll(animals.values());
+        elements.addAll(grassTiles.values());
         return elements;
     }
     public int getNumberOfGrassTiles(){
