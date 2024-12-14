@@ -93,12 +93,14 @@ public class SimulationPresenter implements MapChangeListener {
     }
 
     private void drawObjects(Boundary boundary){
-        
+
         List<WorldElement> elements = worldMap.getElements();
         for (WorldElement element : elements){
-            Text text = new Text(element.toString());
-            GridPane.setHalignment(text, HPos.CENTER);
-            mapGrid.add(text, element.getPosition().getX() - boundary.bottomLeft().getX() + 1, boundary.topRight().getY() - element.getPosition().getY() + 1);
+            if(element instanceof Animal || worldMap.objectAt(element.getPosition()) instanceof Grass){
+                Text text = new Text(element.toString());
+                GridPane.setHalignment(text, HPos.CENTER);
+                mapGrid.add(text, element.getPosition().getX() - boundary.bottomLeft().getX() + 1, boundary.topRight().getY() - element.getPosition().getY() + 1);
+            }
         }
 
     }
