@@ -2,6 +2,7 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.*;
 
+import javax.crypto.spec.PSource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,10 +42,16 @@ public class Simulation implements Runnable {
         if(animalsCount > 0){
             int i = 0;
             for (MoveDirection move : moves) {
-                Animal animal = animals.get(i);
-                worldMap.move(animal, move);
+                try{
+                    Thread.sleep(1000);
+                    Animal animal = animals.get(i);
+                    worldMap.move(animal, move);
 
-                i = (i + 1) % animalsCount;
+                    i = (i + 1) % animalsCount;
+                }
+                catch (InterruptedException e){
+                    System.out.println(e.getMessage());
+                }
             }
         }
 

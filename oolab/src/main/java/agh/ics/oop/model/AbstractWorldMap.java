@@ -98,6 +98,6 @@ public abstract class AbstractWorldMap implements WorldMap{
         return id;
     }
 
-    protected abstract Boundary getCurrentBoundary();
+    public abstract Boundary getCurrentBoundary();
 
 }
