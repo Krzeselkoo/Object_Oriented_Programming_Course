@@ -58,7 +58,7 @@ public class SimulationPresenter implements MapChangeListener {
     }
 
     public void onSimulationStartClicked(){
-        simulationApp.startSimulation();
+        simulationApp.startSimulation(getMoves());
         infoLabel.setText("");
         moveInformation.setFont(new Font(36));
     }
@@ -120,7 +120,7 @@ public class SimulationPresenter implements MapChangeListener {
         return dimensions;
     }
 
-    public String[] getMoves(){
+    private String[] getMoves(){
         return moveList.getText().split(" ");
     }
 

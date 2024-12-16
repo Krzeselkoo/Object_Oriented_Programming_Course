@@ -23,16 +23,14 @@ public class SimulationApp extends Application {
         primaryStage.minHeightProperty().bind(viewRoot.minHeightProperty());
     }
 
-    public void startSimulation(){
+    public void startSimulation(String[] moves){
         try {
             GrassField map = new GrassField(4);
             //RectangularMap map = new RectangularMap(5,5);
             presenter.setWorldMap(map);
             map.subscribe(presenter);
 
-            String[] movesArray = presenter.getMoves();
-
-            List<MoveDirection> directions = OptionsParser.parse(movesArray);
+            List<MoveDirection> directions = OptionsParser.parse(moves);
             List<Vector2d> positions = List.of(new Vector2d(0, 0), new Vector2d(0, 1));
 
             Simulation simulation = new Simulation(positions, directions, map);
